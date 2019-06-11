@@ -5,19 +5,58 @@ import photos from "../../../assets/images/userPhoto.jpg"
 
 
 class Users extends React.Component {
-   
+
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentValue}
+        &count=${this.props.quantityUsersOnPage}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
             })
     }
 
 
+    onChanhePage = (pages) => {
+        this.props.serPages(pages)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pages}
+        &count=${this.props.quantityUsersOnPage}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
+
+    };
+
+
     render() {
 
+
+        let quantityUsersPages = Math.ceil(this.props.totalUsers / this.props.quantityUsersOnPage);
+
+        let quantityPages = [];
+        for (let i = 1; i <= quantityUsersPages; i++) {
+            quantityPages.push(i)
+        }
+
+
         return <div className={style.usersWrapper}>
+
+
+            <div className={style.pageHover}>
+
+
+                {quantityPages.map(pages => {
+                    return <span onClick={(e) => {this.onChanhePage(pages)}}
+                                 className={this.props.currentValue ===
+                    pages && style.numberLInk}> {pages} </span>
+                })}
+
+
+                {/*<span> 2 </span>*/}
+                {/*<span> 3 </span>*/}
+                {/*<span className={style.numberLInk} > 4 </span>*/}
+                {/*<span> 5 </span>*/}
+
+            </div>
 
 
             {this.props.users.map(u => <div key={u.id}>
@@ -48,9 +87,10 @@ class Users extends React.Component {
                 <div>
                     {u.uniqueUrlName}
                 </div>
-                {/*<div>*/}
-                {/*    {u.status}*/}
-                {/*</div>*/}
+                <div>
+                    {u.status}
+                </div>
+
                 {/*<div>*/}
                 {/*    {u.location.city}*/}
                 {/*</div>*/}

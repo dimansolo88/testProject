@@ -15,4 +15,18 @@
 
 }
 
+.numberLInk{
+    font-weight: bolder;
+    font-size: large;
+    cursor: pointer;
+
+
+}
+
+.pageHover:hover{
+    cursor: pointer;
+}
+
+
+
 

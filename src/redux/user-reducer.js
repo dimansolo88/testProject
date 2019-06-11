@@ -1,16 +1,22 @@
 let follow = "FOLLOW";
 let unfollow = "UNFOLLOW";
 let setUsers = "SET-USERS";
+let setCurrentPages = "SET-CURRENT_VALUES";
 
 
 let initialeestate = {
-    users: []
+    users: [],
+    totalUsers: 142,
+    quantityUsersOnPage: 5,
+    currentValue: 1,
 
 
 };
 
 const userReducer = (state = initialeestate, action) => {
     switch (action.type) {
+
+
         case follow:
             return {
                 ...state, users:state.users.map(users => {
@@ -31,7 +37,16 @@ const userReducer = (state = initialeestate, action) => {
 
         case setUsers:
             return {
-                ...state, users: [...state.users, ...action.payload]
+                ...state, users: action.payload
+            };
+
+            // return {
+            //     ...state, users: [...state.users, ...action.payload]
+            // };
+
+        case setCurrentPages:
+            return {
+                ...state, currentValue: action.currentPages
             };
         default:
             return state;
@@ -51,6 +66,10 @@ export const unFollowActionCreator = (userid) => ({
 
 export const setUsersActionCreator = (user) => ({
     type: setUsers,  payload: user
+});
+
+export const setCurrentpagesAC = (currentPages) => ({
+    type: setCurrentPages,  currentPages
 });
 
 

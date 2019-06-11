@@ -36,7 +36,7 @@ let initialstate = {
     ],
 
 
-    textmypost: "jjjj"
+    textmypost: ""
 
 
 };
@@ -52,6 +52,7 @@ const profileReducer = (state = initialstate, action) => {
                 id: 5,
                 message: state.textmypost,
                 like: 0,
+                avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
 
             };
 
