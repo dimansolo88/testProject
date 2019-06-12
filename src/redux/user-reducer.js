@@ -2,13 +2,14 @@ let follow = "FOLLOW";
 let unfollow = "UNFOLLOW";
 let setUsers = "SET-USERS";
 let setCurrentPages = "SET-CURRENT_VALUES";
+let setTotalUsersfromServer = "SET-TOTAL-USERS-FROM-SERVER";
 
 
 let initialeestate = {
     users: [],
-    totalUsers: 142,
+    totalUsers: 0,
     quantityUsersOnPage: 5,
-    currentValue: 1,
+    currentPage: 1,
 
 
 };
@@ -46,7 +47,12 @@ const userReducer = (state = initialeestate, action) => {
 
         case setCurrentPages:
             return {
-                ...state, currentValue: action.currentPages
+                ...state, currentPage: action.currentPages
+            };
+
+        case setTotalUsersfromServer:
+            return {
+                ...state, totalUsers: action.totalUsers
             };
         default:
             return state;
@@ -70,6 +76,10 @@ export const setUsersActionCreator = (user) => ({
 
 export const setCurrentpagesAC = (currentPages) => ({
     type: setCurrentPages,  currentPages
+});
+
+export const setTotalUsersFromServerAC = (totalUsers) => ({
+    type: setTotalUsersfromServer,  totalUsers
 });
 
 
