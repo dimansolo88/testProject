@@ -3,6 +3,7 @@ let unfollow = "UNFOLLOW";
 let setUsers = "SET-USERS";
 let setCurrentPages = "SET-CURRENT_VALUES";
 let setTotalUsersfromServer = "SET-TOTAL-USERS-FROM-SERVER";
+let showPrealoder = "SHOW-PREALODER";
 
 
 let initialeestate = {
@@ -10,7 +11,7 @@ let initialeestate = {
     totalUsers: 0,
     quantityUsersOnPage: 5,
     currentPage: 1,
-
+    isFetching: true,
 
 };
 
@@ -20,9 +21,9 @@ const userReducer = (state = initialeestate, action) => {
 
         case follow:
             return {
-                ...state, users:state.users.map(users => {
+                ...state, users: state.users.map(users => {
                     if (users.id === action.payload)
-                        return {...users,followed: true};
+                        return {...users, followed: true};
                     return users
                 })
             };
@@ -30,7 +31,7 @@ const userReducer = (state = initialeestate, action) => {
         case unfollow:
             return {
                 ...state, users: state.users.map(users => {
-                     if (users.id === action.payload)
+                    if (users.id === action.payload)
                         return {...users, followed: false};
                     return users
                 })
@@ -41,9 +42,9 @@ const userReducer = (state = initialeestate, action) => {
                 ...state, users: action.payload
             };
 
-            // return {
-            //     ...state, users: [...state.users, ...action.payload]
-            // };
+        // return {
+        //     ...state, users: [...state.users, ...action.payload]
+        // };
 
         case setCurrentPages:
             return {
@@ -54,6 +55,13 @@ const userReducer = (state = initialeestate, action) => {
             return {
                 ...state, totalUsers: action.totalUsers
             };
+
+        case showPrealoder:
+            return {
+                ...state, isFetching: action.isFetching
+            };
+
+
         default:
             return state;
     }
@@ -71,22 +79,21 @@ export const unFollowActionCreator = (userid) => ({
 
 
 export const setUsersActionCreator = (user) => ({
-    type: setUsers,  payload: user
+    type: setUsers, payload: user
 });
 
 export const setCurrentpagesAC = (currentPages) => ({
-    type: setCurrentPages,  currentPages
+    type: setCurrentPages, currentPages
 });
 
 export const setTotalUsersFromServerAC = (totalUsers) => ({
-    type: setTotalUsersfromServer,  totalUsers
+    type: setTotalUsersfromServer, totalUsers
 });
+
+export const showPrealoderAC = (isFetching) => ({type:showPrealoder, isFetching });
 
 
 export default userReducer;
-
-
-
 
 
 // let follow = "FOLLOW";

@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {
     followActionCreator,
     setCurrentpagesAC, setTotalUsersFromServerAC,
-    setUsersActionCreator,
+    setUsersActionCreator, showPrealoderAC, togoleIsFetchingAC,
     unFollowActionCreator
 } from "../../../redux/user-reducer";
 import React from "react";
@@ -13,9 +13,11 @@ import Users from "./Users";
 class UsersContanier extends React.Component {
 
     componentDidMount() {
+        this.props.showPrealoderOnUsers(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}
         &count=${this.props.quantityUsersOnPage}`)
             .then(response => {
+                this.props.showPrealoderOnUsers(false);
                 this.props.setUsers(response.data.items);
                 this.props.totalusersCount(response.data.totalCount)
             })
@@ -24,9 +26,11 @@ class UsersContanier extends React.Component {
 
     onChanhePage = (pages) => {
         this.props.serPages(pages);
+        this.props.showPrealoderOnUsers(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pages}
         &count=${this.props.quantityUsersOnPage}`)
             .then(response => {
+                this.props.showPrealoderOnUsers(false);
                 this.props.setUsers(response.data.items)
             })
 
@@ -44,6 +48,9 @@ class UsersContanier extends React.Component {
                       serPages={this.props.serPages}
                       totalusersCount={this.props.totalusersCount}
                       onChanhePage={this.onChanhePage}
+                      isFetching={this.props.isFetching}
+
+
         />
 
 
@@ -58,6 +65,7 @@ const mapStateToProps = (state) => {
         totalUsers: state.usersPages.totalUsers,
         quantityUsersOnPage: state.usersPages.quantityUsersOnPage,
         currentPage: state.usersPages.currentPage,
+        isFetching: state.usersPages.isFetching,
 
     }
 };
@@ -82,7 +90,13 @@ const mapDispatchToProps = (dispatch) => {
 
         totalusersCount: (count) => {
             dispatch(setTotalUsersFromServerAC(count))
+        },
+
+        showPrealoderOnUsers: (isFetching) => {
+            dispatch(showPrealoderAC(isFetching))
         }
+
+
     }
 };
 

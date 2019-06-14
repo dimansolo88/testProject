@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Users.module.css"
 // import * as axios from "axios";
 import photos from "../../../assets/images/userPhoto.jpg"
+import Prealoder from "../../Common/Ptrealoder";
 
 
 const Users = (props) => {
@@ -17,12 +18,16 @@ const Users = (props) => {
 
         return <div className={style.usersWrapper}>
 
+            <div>
+                {props.isFetching ? <Prealoder/> : null}
+            </div>
+
 
             <div className={style.pageHover}>
 
 
                 {quantityPages.map(pages => {
-                    return <span key={pages} onClick={(e) => {props.onChanhePage(pages)}}
+                    return <span  key={pages} onClick={(e) => {props.onChanhePage(pages)}}
                                  className={props.currentPage ===
                     pages && style.numberLInk}> {pages} </span>
                 })}
