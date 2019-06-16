@@ -1,13 +1,13 @@
 import {connect} from "react-redux";
-import {
-    followActionCreator,
-    setCurrentpagesAC, setTotalUsersFromServerAC,
-    setUsersActionCreator, showPrealoderAC, togoleIsFetchingAC,
-    unFollowActionCreator
-} from "../../../redux/user-reducer";
 import React from "react";
 import * as axios from "axios";
 import Users from "./Users";
+import {
+    follU,
+    setCurrentpagesAC, setTotalUsersFromServerAC,
+    setUsersActionCreator, showPrealoderAC,
+    unFollowActionCreator
+} from "../../../redux/user-reducer";
 
 
 class UsersContanier extends React.Component {
@@ -25,7 +25,7 @@ class UsersContanier extends React.Component {
 
 
     onChanhePage = (pages) => {
-        this.props.serPages(pages);
+        this.props.setPages(pages);
         this.props.showPrealoderOnUsers(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pages}
         &count=${this.props.quantityUsersOnPage}`)
@@ -44,8 +44,6 @@ class UsersContanier extends React.Component {
                       currentPage={this.props.currentPage}
                       follU={this.props.follU}
                       unfollU={this.props.unfollU}
-                      setUsers={this.props.setUsers}
-                      serPages={this.props.serPages}
                       totalusersCount={this.props.totalusersCount}
                       onChanhePage={this.onChanhePage}
                       isFetching={this.props.isFetching}
@@ -71,39 +69,45 @@ const mapStateToProps = (state) => {
 };
 
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follU: (id) => {
-            dispatch(followActionCreator(id))
-        },
-        unfollU: (id) => {
-            dispatch(unFollowActionCreator(id))
-        },
-
-        setUsers: (user) => {
-            dispatch(setUsersActionCreator(user))
-        },
-
-        serPages: (pages) => {
-            dispatch(setCurrentpagesAC(pages))
-        },
-
-        totalusersCount: (count) => {
-            dispatch(setTotalUsersFromServerAC(count))
-        },
-
-        showPrealoderOnUsers: (isFetching) => {
-            dispatch(showPrealoderAC(isFetching))
-        }
-
-
-    }
-};
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         follU: (id) => {
+//             dispatch(followActionCreator(id))
+//         },
+//         unfollU: (id) => {
+//             dispatch(unFollowActionCreator(id))
+//         },
+//
+//         setUsers: (user) => {
+//             dispatch(setUsersActionCreator(user))
+//         },
+//
+//         setPages: (pages) => {
+//             dispatch(setCurrentpagesAC(pages))
+//         },
+//
+//         totalusersCount: (count) => {
+//             dispatch(setTotalUsersFromServerAC(count))
+//         },
+//
+//         showPrealoderOnUsers: (isFetching) => {
+//             dispatch(showPrealoderAC(isFetching))
+//         }
+//
+//
+//     }
+// };
 
 
 // const UsersContanier = connect(mapStateToProps, mapDispatchToProps)(Users);
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContanier);
+export default connect(mapStateToProps, {
+    follU,
+    unfollU: unFollowActionCreator,
+    setUsers:setUsersActionCreator,
+    setPages: setCurrentpagesAC,
+    totalusersCount: setTotalUsersFromServerAC,
+    showPrealoderOnUsers:showPrealoderAC,} )(UsersContanier);
 
 
 // import Users from "./Users";

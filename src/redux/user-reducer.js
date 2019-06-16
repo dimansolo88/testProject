@@ -1,6 +1,6 @@
 let follow = "FOLLOW";
 let unfollow = "UNFOLLOW";
-let setUsers = "SET-USERS";
+let setUsersformServer = "SET-USERS-FROM-SERVER";
 let setCurrentPages = "SET-CURRENT_VALUES";
 let setTotalUsersfromServer = "SET-TOTAL-USERS-FROM-SERVER";
 let showPrealoder = "SHOW-PREALODER";
@@ -22,7 +22,7 @@ const userReducer = (state = initialeestate, action) => {
         case follow:
             return {
                 ...state, users: state.users.map(users => {
-                    if (users.id === action.payload)
+                    if (users.id === action.userid)
                         return {...users, followed: true};
                     return users
                 })
@@ -31,15 +31,15 @@ const userReducer = (state = initialeestate, action) => {
         case unfollow:
             return {
                 ...state, users: state.users.map(users => {
-                    if (users.id === action.payload)
+                    if (users.id === action.userid)
                         return {...users, followed: false};
                     return users
                 })
             };
 
-        case setUsers:
+        case setUsersformServer:
             return {
-                ...state, users: action.payload
+                ...state, users: action.user
             };
 
         // return {
@@ -68,18 +68,18 @@ const userReducer = (state = initialeestate, action) => {
 };
 
 
-export const followActionCreator = (userid) => ({
-    type: follow, payload: userid
+export const follU = (userid) => ({
+    type: follow, userid
 });
 
 
 export const unFollowActionCreator = (userid) => ({
-    type: unfollow, payload: userid
+    type: unfollow, userid
 });
 
 
-export const setUsersActionCreator = (user) => ({
-    type: setUsers, payload: user
+export const  setUsersActionCreator= (user) => ({
+    type: setUsersformServer, user
 });
 
 export const setCurrentpagesAC = (currentPages) => ({
