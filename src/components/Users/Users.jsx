@@ -1,12 +1,11 @@
 import React from "react";
 import style from "./Users.module.css"
 // import * as axios from "axios";
-import photos from "../../../assets/images/userPhoto.jpg"
-import Prealoder from "../../Common/Ptrealoder";
+import photos from "../../assets/images/userPhoto.jpg"
+import Prealoder from "../Common/Ptrealoder";
 
 
 const Users = (props) => {
-debugger;
 
     let quantityUsersPages = Math.ceil(props.totalUsers / props.quantityUsersOnPage);
 
@@ -33,6 +32,8 @@ debugger;
                              className={props.currentPage ===
                              pages && style.numberLInk}> {pages} </span>
             })}
+
+
 
 
             {/*<span> 2 </span>*/}

@@ -11,7 +11,7 @@ import Music from "./components/Navbar/Music/Music";
 import Settings from "./components/Navbar/Settings/Settings";
 // import Sitebar from "./components/Navbar/Sitebar/Sitebar";
 import DialogsContanier from "./components/Dialogs/DialogsContanier";
-import UsersContanier from "./components/Navbar/Users/UsersContanier";
+import UsersContanier from "./components/Users/UsersContanier";
 // import Sitebar from './components/Navbar/Sitebar/Sitebar';
 
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import i from "./Profileimg.module.css";
+import style from "./Profileimg.module.css";
 import imageProfile from "../../../assets/images/imageProfile.jpeg"
 
 
-const Profileimg = () =>{
+const Profileimg = (props) =>{
     return (
-        <img  className = {i.profile_img} src={imageProfile}   alt="profile" />
+        <img  className = {style.profile_img} src={imageProfile}   alt="profile" />
     );
-}
+};
 
 export default Profileimg;

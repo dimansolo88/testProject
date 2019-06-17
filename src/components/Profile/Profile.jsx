@@ -2,13 +2,10 @@ import React from 'react';
 // import p from './Profile.module.css';
 // import Mypost from "./Mypost/Mypost";
 import Profileimg from "./Profileimg/Profileimg";
-import Img from "./Avatar/Img/Img";
+import PfofileInfo from "./ProfileInfo/ProfileInfo";
 // import Post from "./Mypost/Post/Post";
-import NewPost from "./Mypost/NewPost/NewPost";
-import MypostContanier from "./Mypost/MypostContanier";
-
-
-
+import NewPost from "../Mypost/NewPost/NewPost";
+import MypostContanier from "../Mypost/MypostContanier";
 
 
 const Profile = (props) => {
@@ -23,14 +20,14 @@ const Profile = (props) => {
     // ]
 
 
-
     return (
         <div>
-            <Profileimg/>
-            <Img/>
-            <NewPost/>
 
-            <MypostContanier  />
+
+            <Profileimg/>
+            <PfofileInfo/>
+            <NewPost/>
+            <MypostContanier/>
 
             {/*state={props.state} dispatch={props.dispatch}*/}
 
@@ -49,7 +46,7 @@ const Profile = (props) => {
 
         </div>
     );
-}
+};
 
 
 //c={props.b} jfd={props.cdv}

@@ -7,7 +7,7 @@ import {
     setCurrentpagesAC, setTotalUsersFromServerAC,
     setUsersActionCreator, showPrealoderAC,
     unFollowActionCreator
-} from "../../../redux/user-reducer";
+} from "../../redux/user-reducer";
 
 
 class UsersContanier extends React.Component {
