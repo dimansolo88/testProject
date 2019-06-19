@@ -4,7 +4,6 @@ import React from 'react';
 import Profileimg from "./Profileimg/Profileimg";
 import PfofileInfo from "./ProfileInfo/ProfileInfo";
 // import Post from "./Mypost/Post/Post";
-import NewPost from "../Mypost/NewPost/NewPost";
 import MypostContanier from "../Mypost/MypostContanier";
 
 
@@ -25,8 +24,7 @@ const Profile = (props) => {
 
 
             <Profileimg/>
-            <PfofileInfo/>
-            <NewPost/>
+            <PfofileInfo {...props} />
             <MypostContanier/>
 
             {/*state={props.state} dispatch={props.dispatch}*/}

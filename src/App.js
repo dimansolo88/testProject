@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
+// import Profile from "./components/Profile/Profile";
 // import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import News from "./components/Navbar/News/News";
@@ -12,6 +12,7 @@ import Settings from "./components/Navbar/Settings/Settings";
 // import Sitebar from "./components/Navbar/Sitebar/Sitebar";
 import DialogsContanier from "./components/Dialogs/DialogsContanier";
 import UsersContanier from "./components/Users/UsersContanier";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 // import Sitebar from './components/Navbar/Sitebar/Sitebar';
 
 
@@ -47,7 +48,7 @@ const App = (props) => {
                     {/*state={props.astate.profilepage} dispatch={props.dispatch}*/}
 
                     {/*<Route path="/profile" component={Profile}/>*/}
-                    <Route path="/profile" render={ ()=> <Profile  />  }/>
+                    <Route path="/profile" render={ ()=> <ProfileContainer  />  }/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>

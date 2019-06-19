@@ -1,15 +1,14 @@
 import React from 'react';
 import m from './Mypost.module.css';
-
-
 // import {addpostActionCreator, updatepostActionCreator} from "../../../redux/profile-reducer";
 import Post from "./Post/Post";
-
-
+import NewPost from "./NewPost/NewPost";
 
 
 
 const Mypost = (props) => {
+
+
 
     let states = props.stated;
 
@@ -71,7 +70,10 @@ const Mypost = (props) => {
     return (
 
 
+
         <div className={m.post}>
+
+            <NewPost/>
 
 
             <h3> my posts</h3>

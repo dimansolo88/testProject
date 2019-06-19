@@ -3,6 +3,10 @@ import style from "./Users.module.css"
 // import * as axios from "axios";
 import photos from "../../assets/images/userPhoto.jpg"
 import Prealoder from "../Common/Ptrealoder";
+import {NavLink} from "react-router-dom";
+
+
+
 
 
 const Users = (props) => {
@@ -34,8 +38,6 @@ const Users = (props) => {
             })}
 
 
-
-
             {/*<span> 2 </span>*/}
             {/*<span> 3 </span>*/}
             {/*<span className={style.numberLInk} > 4 </span>*/}
@@ -47,7 +49,12 @@ const Users = (props) => {
         {props.users.map(u => <div key={u.id}>
 
             <div>
-                <img src={u.photos.small != null ? u.photos.small : photos} alt="avatar" className={style.avatar}/>
+
+                <NavLink to= {"/profile/" + u.id} >
+                    <img src={u.photos.small != null ? u.photos.small : photos} alt="avatar" className={style.avatar}/>
+
+                </NavLink>
+
             </div>
 
 

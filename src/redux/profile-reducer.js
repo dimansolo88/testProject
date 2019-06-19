@@ -1,6 +1,8 @@
 let add_post = "ADD-POST";
 let update_post = "UPDATE-POST";
 // import users from "../assets/images/photoUsersPost.jpg"
+let setProfileUser = "SET-PROFILE-USER";
+
 
 
 
@@ -36,10 +38,14 @@ let initialstate = {
     ],
 
 
-    textmypost: ""
+    textmypost: "jjj",
+
+    setProfileUs: null,
+
 
 
 };
+
 
 
 const profileReducer = (state = initialstate, action) => {
@@ -70,6 +76,11 @@ const profileReducer = (state = initialstate, action) => {
                 textmypost: action.postext
             };
         // return stateCopy;
+
+        case setProfileUser:
+            return {
+                ...state, setProfileUs: action.profile
+            };
 
         default:
             return state;
@@ -111,6 +122,8 @@ export const updatepostActionCreator = (textposts) => ({
     type: update_post, postext: textposts
 
 });
+
+export const setProfileU = (profile) => ({type: setProfileUser, profile});
 
 
 export default profileReducer;
