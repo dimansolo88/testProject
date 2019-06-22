@@ -48,7 +48,7 @@ const App = (props) => {
                     {/*state={props.astate.profilepage} dispatch={props.dispatch}*/}
 
                     {/*<Route path="/profile" component={Profile}/>*/}
-                    <Route path="/profile" render={ ()=> <ProfileContainer  />  }/>
+                    <Route path="/profile/:userid?" render={ ()=> <ProfileContainer/>  }/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>

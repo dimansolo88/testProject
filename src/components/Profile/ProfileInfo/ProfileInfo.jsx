@@ -6,7 +6,7 @@ import photos from '../../../assets/images/userPhoto.jpg'
 
 const ProfileInfo = (props) => {
 
-    if (!props.setProfileUser) {
+    if (!props.setProfileUser) {  // to fix
         return <Prealoder/>
     }
 
