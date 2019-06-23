@@ -1,7 +1,6 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 // import Profile from "./components/Profile/Profile";
 // import Dialogs from "./components/Dialogs/Dialogs";
@@ -13,6 +12,7 @@ import Settings from "./components/Navbar/Settings/Settings";
 import DialogsContanier from "./components/Dialogs/DialogsContanier";
 import UsersContanier from "./components/Users/UsersContanier";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 // import Sitebar from './components/Navbar/Sitebar/Sitebar';
 
 
@@ -32,7 +32,7 @@ const App = (props) => {
        // <BrowserRouter>
             <div className="app-wrapper">
 
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
 
