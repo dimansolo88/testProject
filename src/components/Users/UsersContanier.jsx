@@ -15,7 +15,8 @@ class UsersContanier extends React.Component {
     componentDidMount() {
         this.props.showPrealoderOnUsers(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}
-        &count=${this.props.quantityUsersOnPage}`)
+        &count=${this.props.quantityUsersOnPage}`
+            ,{withCredentials:true})
             .then(response => {
                 this.props.showPrealoderOnUsers(false);
                 this.props.setUsers(response.data.items);
@@ -28,7 +29,7 @@ class UsersContanier extends React.Component {
         this.props.setPages(pages);
         this.props.showPrealoderOnUsers(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pages}
-        &count=${this.props.quantityUsersOnPage}`)
+        &count=${this.props.quantityUsersOnPage}`,{withCredentials: true})
             .then(response => {
                 this.props.showPrealoderOnUsers(false);
                 this.props.setUsers(response.data.items)
@@ -47,6 +48,7 @@ class UsersContanier extends React.Component {
                       totalusersCount={this.props.totalusersCount}
                       onChanhePage={this.onChanhePage}
                       isFetching={this.props.isFetching}
+                      showPrealoderOnUsers={this.props.showPrealoderOnUsers}
 
 
         />

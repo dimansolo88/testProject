@@ -4,9 +4,7 @@ import style from "./Users.module.css"
 import photos from "../../assets/images/userPhoto.jpg"
 import Prealoder from "../Common/Ptrealoder";
 import {NavLink} from "react-router-dom";
-
-
-
+import * as axios from 'axios';
 
 
 const Users = (props) => {
@@ -50,7 +48,7 @@ const Users = (props) => {
 
             <div>
 
-                <NavLink to= {"/profile/" + u.id} >
+                <NavLink to={"/profile/" + u.id}>
                     <img src={u.photos.small != null ? u.photos.small : photos} alt="avatar" className={style.avatar}/>
 
                 </NavLink>
@@ -61,10 +59,39 @@ const Users = (props) => {
             <div>
 
                 {u.followed ? <button onClick={() => {
-                        props.unfollU(u.id)
+                        props.showPrealoderOnUsers(true);
+                    axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}` ,{
+                        withCredentials: true,
+                        headers: {
+                            'API-KEY': 'dc432957-d988-48fc-8955-9690b8d0ed47'
+                        }
+                    })
+                        .then(response => {
+                            props.showPrealoderOnUsers(false);
+                            if (response.data.resultCode ===0) {
+                                props.unfollU(u.id)
+                            }
+
+                        });
+
+
                     }}> unfollow </button> :
                     <button onClick={() => {
-                        props.follU(u.id)
+                        props.showPrealoderOnUsers(true);
+                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {}, {
+                            withCredentials: true,
+                            headers: {
+                                'API-KEY': 'dc432957-d988-48fc-8955-9690b8d0ed47'
+                            }
+                        })
+                            .then(response => {
+                                props.showPrealoderOnUsers(false);
+                                if (response.data.resultCode === 0) {
+                                    props.follU(u.id)
+                                }
+                            })
+
+
                     }}> follow </button>}
 
 
