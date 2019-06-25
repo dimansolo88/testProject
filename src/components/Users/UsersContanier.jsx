@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import React from "react";
-import * as axios from "axios";
+// import * as axios from "axios";
 import Users from "./Users";
 import {
     follU,
@@ -8,19 +8,18 @@ import {
     setUsersActionCreator, showPrealoderAC,
     unFollowActionCreator
 } from "../../redux/user-reducer";
+import {usersAPI} from "../../API/API";
 
 
 class UsersContanier extends React.Component {
 
     componentDidMount() {
         this.props.showPrealoderOnUsers(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}
-        &count=${this.props.quantityUsersOnPage}`
-            ,{withCredentials:true})
-            .then(response => {
+        usersAPI.getUsers(this.props.currentPage,this.props.quantityUsersOnPage)
+            .then(data => {
                 this.props.showPrealoderOnUsers(false);
-                this.props.setUsers(response.data.items);
-                this.props.totalusersCount(response.data.totalCount)
+                this.props.setUsers(data.items);
+                this.props.totalusersCount(data.totalCount)
             })
     }
 
@@ -28,11 +27,10 @@ class UsersContanier extends React.Component {
     onChanhePage = (pages) => {
         this.props.setPages(pages);
         this.props.showPrealoderOnUsers(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pages}
-        &count=${this.props.quantityUsersOnPage}`,{withCredentials: true})
-            .then(response => {
+        usersAPI.selectUsersCurrentPage(pages,this.props.quantityUsersOnPage)
+            .then(data => {
                 this.props.showPrealoderOnUsers(false);
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
 
     };

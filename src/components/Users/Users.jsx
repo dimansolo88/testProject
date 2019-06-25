@@ -7,6 +7,8 @@ import {NavLink} from "react-router-dom";
 import * as axios from 'axios';
 
 
+
+
 const Users = (props) => {
 
     let quantityUsersPages = Math.ceil(props.totalUsers / props.quantityUsersOnPage);
@@ -60,12 +62,13 @@ const Users = (props) => {
 
                 {u.followed ? <button onClick={() => {
                         props.showPrealoderOnUsers(true);
-                    axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}` ,{
+                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}` ,{
                         withCredentials: true,
                         headers: {
                             'API-KEY': 'dc432957-d988-48fc-8955-9690b8d0ed47'
                         }
                     })
+
                         .then(response => {
                             props.showPrealoderOnUsers(false);
                             if (response.data.resultCode ===0) {
@@ -78,12 +81,14 @@ const Users = (props) => {
                     }}> unfollow </button> :
                     <button onClick={() => {
                         props.showPrealoderOnUsers(true);
-                        axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {}, {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                             withCredentials: true,
                             headers: {
                                 'API-KEY': 'dc432957-d988-48fc-8955-9690b8d0ed47'
                             }
                         })
+
+
                             .then(response => {
                                 props.showPrealoderOnUsers(false);
                                 if (response.data.resultCode === 0) {

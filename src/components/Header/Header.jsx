@@ -12,11 +12,9 @@ const Header = (props) => {
 
 
                <NavLink to={ props.isAuth ? "/profile/" : "/login/"}  className={style.login}>
-<<<<<<< HEAD
+
                    {props.isAuth ? props.login : "Login"}  {/*possible to redo*/}
-=======
-                   {props.isAuth ? "Hi"+ " " +props.login : "Login"}  {/*possible to redo*/}
->>>>>>> 218b57007eb14da6ee9bac7df9adf1bdb064992f
+
 
 
                </NavLink>
