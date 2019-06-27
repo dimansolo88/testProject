@@ -7,8 +7,6 @@ import {NavLink} from "react-router-dom";
 import * as axios from 'axios';
 
 
-
-
 const Users = (props) => {
 
     let quantityUsersPages = Math.ceil(props.totalUsers / props.quantityUsersOnPage);
@@ -60,44 +58,46 @@ const Users = (props) => {
 
             <div>
 
-                {u.followed ? <button onClick={() => {
-                        props.showPrealoderOnUsers(true);
-                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}` ,{
-                        withCredentials: true,
-                        headers: {
-                            'API-KEY': 'dc432957-d988-48fc-8955-9690b8d0ed47'
-                        }
-                    })
+                {u.followed ? <button disabled={props.followingProgress.some(id => id === u.id)}
+                                      onClick={() => {
+                                          props.toogleDiableBotton(true, u.id);
+                                          axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                              withCredentials: true,
+                                              headers: {
+                                                  'API-KEY': 'dc432957-d988-48fc-8955-9690b8d0ed47'
+                                              }
+                                          })
 
-                        .then(response => {
-                            props.showPrealoderOnUsers(false);
-                            if (response.data.resultCode ===0) {
-                                props.unfollU(u.id)
-                            }
+                                              .then(response => {
+                                                  props.toogleDiableBotton(false, u.id);
+                                                  if (response.data.resultCode === 0) {
+                                                      props.unfollU(u.id)
+                                                  }
 
-                        });
-
-
-                    }}> unfollow </button> :
-                    <button onClick={() => {
-                        props.showPrealoderOnUsers(true);
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                            withCredentials: true,
-                            headers: {
-                                'API-KEY': 'dc432957-d988-48fc-8955-9690b8d0ed47'
-                            }
-                        })
+                                              });
 
 
-                            .then(response => {
-                                props.showPrealoderOnUsers(false);
-                                if (response.data.resultCode === 0) {
-                                    props.follU(u.id)
-                                }
-                            })
+                                      }}> unfollow </button> :
+                    <button disabled={props.followingProgress.some(id => id === u.id)}
+                            onClick={() => {
+                                props.toogleDiableBotton(true, u.id);
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'API-KEY': 'dc432957-d988-48fc-8955-9690b8d0ed47'
+                                    }
+                                })
 
 
-                    }}> follow </button>}
+                                    .then(response => {
+                                        props.toogleDiableBotton(false, u.id);
+                                        if (response.data.resultCode === 0) {
+                                            props.follU(u.id)
+                                        }
+                                    })
+
+
+                            }}> follow </button>}
 
 
             </div>

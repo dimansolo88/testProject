@@ -4,6 +4,8 @@ let setUsersformServer = "SET-USERS-FROM-SERVER";
 let setCurrentPages = "SET-CURRENT_VALUES";
 let setTotalUsersfromServer = "SET-TOTAL-USERS-FROM-SERVER";
 let showPrealoder = "SHOW-PREALODER";
+let followingBotton = "FOLLOWING-BOTTON";
+
 
 
 let initialeestate = {
@@ -12,6 +14,10 @@ let initialeestate = {
     quantityUsersOnPage: 5,
     currentPage: 1,
     isFetching: true,
+    followingProgress: [],
+
+
+
 
 };
 
@@ -61,6 +67,15 @@ const userReducer = (state = initialeestate, action) => {
                 ...state, isFetching: action.isFetching
             };
 
+        case followingBotton:
+            return {
+                ...state,followingProgress: action.progressDiable
+                    ? [...state.followingProgress,action.idFromUI]
+                    : [state.followingProgress.filter(id => id !== action.idFromUI)]
+            };
+
+
+
 
         default:
             return state;
@@ -91,6 +106,7 @@ export const setTotalUsersFromServerAC = (totalUsers) => ({
 });
 
 export const showPrealoderAC = (isFetching) => ({type:showPrealoder, isFetching });
+export const toogleDiableBotton = (progressDiable, idFromUI) => ({type: followingBotton, progressDiable, idFromUI });
 
 
 export default userReducer;

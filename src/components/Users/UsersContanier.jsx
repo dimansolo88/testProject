@@ -3,9 +3,9 @@ import React from "react";
 // import * as axios from "axios";
 import Users from "./Users";
 import {
-    follU,
+    follU, pr,
     setCurrentpagesAC, setTotalUsersFromServerAC,
-    setUsersActionCreator, showPrealoderAC,
+    setUsersActionCreator, showPrealoderAC, toogleDiableBotton,
     unFollowActionCreator
 } from "../../redux/user-reducer";
 import {usersAPI} from "../../API/API";
@@ -47,6 +47,9 @@ class UsersContanier extends React.Component {
                       onChanhePage={this.onChanhePage}
                       isFetching={this.props.isFetching}
                       showPrealoderOnUsers={this.props.showPrealoderOnUsers}
+                      followingProgress={this.props.followingProgress}
+                      toogleDiableBotton={this.props.toogleDiableBotton}
+
 
 
         />
@@ -64,6 +67,10 @@ const mapStateToProps = (state) => {
         quantityUsersOnPage: state.usersPages.quantityUsersOnPage,
         currentPage: state.usersPages.currentPage,
         isFetching: state.usersPages.isFetching,
+        followingProgress: state.usersPages.followingProgress
+
+
+
 
     }
 };
@@ -107,7 +114,7 @@ export default connect(mapStateToProps, {
     setUsers:setUsersActionCreator,
     setPages: setCurrentpagesAC,
     totalusersCount: setTotalUsersFromServerAC,
-    showPrealoderOnUsers:showPrealoderAC,} )(UsersContanier);
+    showPrealoderOnUsers:showPrealoderAC,toogleDiableBotton} )(UsersContanier);
 
 
 // import Users from "./Users";
