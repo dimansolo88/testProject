@@ -17,7 +17,7 @@ class HeaderContainer extends React.Component {
                 if (response.data.resultCode === 0) {this.props.authMe(id,email,login);
 
                 }
-                
+
             })
     }
 

@@ -1,3 +1,5 @@
+import {usersAPI} from "../API/API";
+
 let follow = "FOLLOW";
 let unfollow = "UNFOLLOW";
 let setUsersformServer = "SET-USERS-FROM-SERVER";
@@ -108,6 +110,26 @@ export const setTotalUsersFromServerAC = (totalUsers) => ({
 export const showPrealoderAC = (isFetching) => ({type:showPrealoder, isFetching });
 export const toogleDiableBotton = (progressDiable, idFromUI) => ({type: followingBotton, progressDiable, idFromUI });
 
+
+
+
+
+export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
+    return  (dispatch) => {
+
+        dispatch(showPrealoderAC(true));
+        usersAPI.getUsers(currentPage,quantityUsersOnPage)
+            .then(data => {
+                dispatch(showPrealoderAC(false));
+                dispatch(setUsersActionCreator(data.items));
+                dispatch(setTotalUsersFromServerAC(data.totalCount));
+                dispatch(setCurrentpagesAC(currentPage,quantityUsersOnPage))
+            })
+
+    }
+
+
+};
 
 export default userReducer;
 

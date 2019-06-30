@@ -5,7 +5,7 @@ import Users from "./Users";
 import {
     follU,
     setCurrentpagesAC, setTotalUsersFromServerAC,
-    setUsersActionCreator, showPrealoderAC, toogleDiableBotton,
+    setUsersActionCreator, setUserThunkCreator, showPrealoderAC, toogleDiableBotton,
     unFollowActionCreator
 } from "../../redux/user-reducer";
 import {usersAPI} from "../../API/API";
@@ -14,24 +14,29 @@ import {usersAPI} from "../../API/API";
 class UsersContanier extends React.Component {
 
     componentDidMount() {
-        this.props.showPrealoderOnUsers(true);
-        usersAPI.getUsers(this.props.currentPage,this.props.quantityUsersOnPage)
-            .then(data => {
-                this.props.showPrealoderOnUsers(false);
-                this.props.setUsers(data.items);
-                this.props.totalusersCount(data.totalCount)
-            })
+        // this.props.showPrealoderOnUsers(true);
+        // usersAPI.getUsers(this.props.currentPage,this.props.quantityUsersOnPage)
+        //     .then(data => {
+        //         this.props.showPrealoderOnUsers(false);
+        //         this.props.setUsers(data.items);
+        //         this.props.totalusersCount(data.totalCount)
+        //     })
+
+        this.props.setUserThunkCreator(this.props.currentPage,this.props.quantityUsersOnPage);
+
     }
 
 
     onChanhePage = (pages) => {
-        this.props.setPages(pages);
-        this.props.showPrealoderOnUsers(true);
-        usersAPI.selectUsersCurrentPage(pages,this.props.quantityUsersOnPage)
-            .then(data => {
-                this.props.showPrealoderOnUsers(false);
-                this.props.setUsers(data.items)
-            })
+        // this.props.setPages(pages);
+        // this.props.showPrealoderOnUsers(true);
+        // usersAPI.selectUsersCurrentPage(pages,this.props.quantityUsersOnPage)
+        //     .then(data => {
+        //         this.props.showPrealoderOnUsers(false);
+        //         this.props.setUsers(data.items)
+        //     })
+
+        this.props.setUserThunkCreator(pages,this.props.quantityUsersOnPage);
 
     };
 
@@ -114,7 +119,7 @@ export default connect(mapStateToProps, {
     setUsers:setUsersActionCreator,
     setPages: setCurrentpagesAC,
     totalusersCount: setTotalUsersFromServerAC,
-    showPrealoderOnUsers:showPrealoderAC,toogleDiableBotton} )(UsersContanier);
+    showPrealoderOnUsers:showPrealoderAC,toogleDiableBotton ,setUserThunkCreator} )(UsersContanier);
 
 
 // import Users from "./Users";
