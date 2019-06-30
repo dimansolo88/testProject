@@ -21,7 +21,7 @@ export const usersAPI = {
     },
 
 
-    selectUsersCurrentPage (pages,quantityUsersOnPage) {
+    selectUsersCurrentPage(pages, quantityUsersOnPage) {
 
         return instance.get(`users?page=${pages}
         &count=${quantityUsersOnPage}`)
@@ -29,21 +29,29 @@ export const usersAPI = {
 
     },
 
-    // follow (id) {
-    //     return instance.post(`follow/${id}`)
-    //         .then(response => response.data)
-    //
-    //
-    // },
-    //
-    //
-    // unfoloow (id) {
-    //     return instance.delete(`follow/${id}` )
-    //         .then(response => response.data)
-    //
-    //
-    // },
+    follow(id) {
+        return instance.post(`follow/${id}`)
 
+
+    },
+
+
+    unfoloow(id) {
+        return instance.delete(`follow/${id}`)
+
+    },
+
+
+};
+
+
+export const profileAPI = {
+
+    authMe() {
+        return instance.get(`auth/me`)
+
+
+    }
 
 };
 
