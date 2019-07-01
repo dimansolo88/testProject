@@ -1,3 +1,5 @@
+import {profileAPI} from "../API/API";
+
 let set_AuthMe = "SET-AUTH-ME";
 
 
@@ -32,6 +34,24 @@ const authReducer = (state = initialstate, action) => {
 
 
 export const authMe = (id,email,login) => ({type:set_AuthMe, payload:{id,email,login}});
+
+
+export const auhMeThunkCreator = () => {
+    return (dispatch) => {
+        profileAPI.authMe()
+            .then(response => {
+                let {id, email, login} = response.data.data;
+                if (response.data.resultCode === 0) {dispatch(authMe(id,email,login));
+
+                }
+
+            })
+
+    }
+};
+
+
+
 
 
 export default authReducer;

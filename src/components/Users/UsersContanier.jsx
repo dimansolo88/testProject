@@ -3,12 +3,8 @@ import React from "react";
 // import * as axios from "axios";
 import Users from "./Users";
 import {
-    follU,
-    setCurrentpagesAC, setTotalUsersFromServerAC,
-    setUsersActionCreator, setUserThunkCreator, showPrealoderAC, toogleDiableBotton,
-    unFollowActionCreator
+    followThunkCreator, setUserThunkCreator, unfollowThunkCreator
 } from "../../redux/user-reducer";
-import {usersAPI} from "../../API/API";
 
 
 class UsersContanier extends React.Component {
@@ -22,7 +18,7 @@ class UsersContanier extends React.Component {
         //         this.props.totalusersCount(data.totalCount)
         //     })
 
-        this.props.setUserThunkCreator(this.props.currentPage,this.props.quantityUsersOnPage);
+        this.props.setUserThunkCreator(this.props.currentPage, this.props.quantityUsersOnPage);
 
     }
 
@@ -36,7 +32,7 @@ class UsersContanier extends React.Component {
         //         this.props.setUsers(data.items)
         //     })
 
-        this.props.setUserThunkCreator(pages,this.props.quantityUsersOnPage);
+        this.props.setUserThunkCreator(pages, this.props.quantityUsersOnPage);
 
     };
 
@@ -54,7 +50,8 @@ class UsersContanier extends React.Component {
                       showPrealoderOnUsers={this.props.showPrealoderOnUsers}
                       followingProgress={this.props.followingProgress}
                       toogleDiableBotton={this.props.toogleDiableBotton}
-
+                      followThunkCreator={this.props.followThunkCreator}
+                      unfollowThunkCreator={this.props.unfollowThunkCreator}
 
 
         />
@@ -73,8 +70,6 @@ const mapStateToProps = (state) => {
         currentPage: state.usersPages.currentPage,
         isFetching: state.usersPages.isFetching,
         followingProgress: state.usersPages.followingProgress
-
-
 
 
     }
@@ -113,13 +108,8 @@ const mapStateToProps = (state) => {
 
 // const UsersContanier = connect(mapStateToProps, mapDispatchToProps)(Users);
 
-export default connect(mapStateToProps, {
-    follU,
-    unfollU: unFollowActionCreator,
-    setUsers:setUsersActionCreator,
-    setPages: setCurrentpagesAC,
-    totalusersCount: setTotalUsersFromServerAC,
-    showPrealoderOnUsers:showPrealoderAC,toogleDiableBotton ,setUserThunkCreator} )(UsersContanier);
+export default connect(mapStateToProps, {setUserThunkCreator, followThunkCreator,
+    unfollowThunkCreator})(UsersContanier);
 
 
 // import Users from "./Users";

@@ -1,3 +1,5 @@
+import {profileAPI} from "../API/API";
+
 let add_post = "ADD-POST";
 let update_post = "UPDATE-POST";
 // import users from "../assets/images/photoUsersPost.jpg"
@@ -124,6 +126,20 @@ export const updatepostActionCreator = (textposts) => ({
 });
 
 export const setProfileU = (profile) => ({type: setProfileUser, profile});
+
+
+
+export const profileInfoThunkCreator = (userid) => {
+    return (dispatch) => {
+        profileAPI.ProfileInfo(userid)
+            .then(response => {
+                dispatch(setProfileU(response.data))
+
+
+            })
+
+    }
+};
 
 
 export default profileReducer;

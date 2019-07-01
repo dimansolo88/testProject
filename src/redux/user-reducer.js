@@ -131,6 +131,40 @@ export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
 
 };
 
+
+
+export const followThunkCreator = (id) => {
+    return (dispatch) => {
+        dispatch(toogleDiableBotton(true, id));
+
+
+        usersAPI.follow(id)
+            .then(response => {
+                dispatch(toogleDiableBotton(false, id));
+                if (response.data.resultCode === 0) {
+                    dispatch(follU(id));
+                }
+            })
+    }
+};
+
+
+export const unfollowThunkCreator = (id) => {
+    return (dispatch) => {
+        dispatch(toogleDiableBotton(true, id));
+        usersAPI.unfoloow(id)
+            .then(response => {
+                dispatch(toogleDiableBotton(false, id));
+                if (response.data.resultCode === 0) {
+                   dispatch(unFollowActionCreator(id))
+                }
+            })
+    }
+
+
+
+}
+
 export default userReducer;
 
 

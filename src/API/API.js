@@ -21,13 +21,13 @@ export const usersAPI = {
     },
 
 
-    selectUsersCurrentPage(pages, quantityUsersOnPage) {
-
-        return instance.get(`users?page=${pages}
-        &count=${quantityUsersOnPage}`)
-            .then(response => response.data)
-
-    },
+    // selectUsersCurrentPage(pages, quantityUsersOnPage) {
+    //
+    //     return instance.get(`users?page=${pages}
+    //     &count=${quantityUsersOnPage}`)
+    //         .then(response => response.data)
+    //
+    // },
 
     follow(id) {
         return instance.post(`follow/${id}`)
@@ -50,6 +50,11 @@ export const profileAPI = {
     authMe() {
         return instance.get(`auth/me`)
 
+
+    },
+
+    ProfileInfo (userid) {
+        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userid)
 
     }
 
