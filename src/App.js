@@ -13,6 +13,7 @@ import DialogsContanier from "./components/Dialogs/DialogsContanier";
 import UsersContanier from "./components/Users/UsersContanier";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 // import Sitebar from './components/Navbar/Sitebar/Sitebar';
 
 
@@ -53,6 +54,8 @@ const App = (props) => {
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
                     <Route path="/users" render={ () => <UsersContanier />  }/>
+                    <Route path="/login" render={ () => <Login />}  />
+
 
                     {/*profilepagest={props.astate.profilepage}*/}
 
