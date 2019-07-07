@@ -24,7 +24,7 @@ const Profile = (props) => {
 
 
             <Profileimg/>
-            <PfofileInfo {...props} />
+            <PfofileInfo {...props}  />
             <MypostContanier/>
 
             {/*state={props.state} dispatch={props.dispatch}*/}

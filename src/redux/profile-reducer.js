@@ -4,8 +4,7 @@ let add_post = "ADD-POST";
 let update_post = "UPDATE-POST";
 // import users from "../assets/images/photoUsersPost.jpg"
 let setProfileUser = "SET-PROFILE-USER";
-
-
+let setUserStatus = "SET-PROFILE-STATUS";
 
 
 let initialstate = {
@@ -44,10 +43,10 @@ let initialstate = {
 
     setProfileUs: null,
 
+    status: "",
 
 
 };
-
 
 
 const profileReducer = (state = initialstate, action) => {
@@ -82,6 +81,11 @@ const profileReducer = (state = initialstate, action) => {
         case setProfileUser:
             return {
                 ...state, setProfileUs: action.profile
+            };
+
+        case setUserStatus:
+            return {
+                ...state, status: action.status
             };
 
         default:
@@ -127,11 +131,12 @@ export const updatepostActionCreator = (textposts) => ({
 
 export const setProfileU = (profile) => ({type: setProfileUser, profile});
 
+export const setProfileStatus = (status) => ({type: setUserStatus, status});
 
 
 export const profileInfoThunkCreator = (userid) => {
     return (dispatch) => {
-        profileAPI.ProfileInfo(userid)
+        profileAPI.profileInfo(userid)
             .then(response => {
                 dispatch(setProfileU(response.data))
 
@@ -139,6 +144,24 @@ export const profileInfoThunkCreator = (userid) => {
             })
 
     }
+};
+
+export const getProfileStatusThunkCreator = (userid) => {
+    return (dispatch) => {
+        profileAPI.getProfileStatus(userid)
+            .then(response => {
+                dispatch(setProfileStatus(response.data))
+            })
+    }
+};
+
+export const updateProfileStatusThunkCreator = (status) => (dispatch) => {
+    profileAPI.updateProfileStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setProfileStatus(status));
+            }
+        })
 };
 
 

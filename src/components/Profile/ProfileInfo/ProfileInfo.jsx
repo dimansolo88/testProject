@@ -2,9 +2,11 @@ import React from "react";
 import style from './ProfileInfo.module.css';
 import Prealoder from "../../Common/Ptrealoder";
 import photos from '../../../assets/images/userPhoto.jpg'
+import ProfileStatus from "./ProfileStatus";
 
 
 const ProfileInfo = (props) => {
+
 
     if (!props.setProfileUser) {  // to fix
         return <Prealoder/>
@@ -15,10 +17,13 @@ const ProfileInfo = (props) => {
         <div className={style.info}>
 
 
+
+
             <div>
 
                 <img src={props.setProfileUser.photos.large != null ? props.setProfileUser.photos.large
                     : photos} alt="ProfilePhoto"/>
+                    <ProfileStatus {...props}  />
 
                 <span className={style.web}>
 

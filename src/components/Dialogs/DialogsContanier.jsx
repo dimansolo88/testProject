@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-let redirect = WithAthREdirect(Dialogs)
+let redirect = WithAthREdirect(Dialogs);
 
 
 const DialogsContanier = connect(mapStateToProps, mapDispatchToProps)(redirect);

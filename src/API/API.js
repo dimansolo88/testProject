@@ -42,6 +42,8 @@ export const usersAPI = {
     },
 
 
+
+
 };
 
 
@@ -53,10 +55,18 @@ export const profileAPI = {
 
     },
 
-    ProfileInfo (userid) {
+    profileInfo (userid) {
         return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userid)
 
-    }
+    },
+
+    getProfileStatus (userid) {
+        return instance.get (`profile/status/` + userid)
+    },
+
+    updateProfileStatus (status) {
+        return instance.put(`profile/status/`, {status:status})
+    },
 
 };
 
