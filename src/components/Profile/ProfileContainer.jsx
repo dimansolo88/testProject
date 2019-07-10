@@ -54,7 +54,8 @@ let mapStateToProps = (state) => {
     return {
         setProfileUser: state.profilepage.setProfileUs,
         isAuth: state.auth.isAuth,
-        status: state.profilepage.status
+        status: state.profilepage.status,
+        isFetching:state.profilepage.isFetching,
 
 
     }

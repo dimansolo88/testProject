@@ -4,7 +4,8 @@ let add_post = "ADD-POST";
 let update_post = "UPDATE-POST";
 // import users from "../assets/images/photoUsersPost.jpg"
 let setProfileUser = "SET-PROFILE-USER";
-let setUserStatus = "SET-PROFILE-STATUS";
+let setUserStatus = "SET-PROFILE-STATUS";;
+let showPrealoder = "SHOW-PREALODER";
 
 
 let initialstate = {
@@ -44,6 +45,8 @@ let initialstate = {
     setProfileUs: null,
 
     status: "",
+
+    isFetching: false,
 
 
 };
@@ -86,6 +89,12 @@ const profileReducer = (state = initialstate, action) => {
         case setUserStatus:
             return {
                 ...state, status: action.status
+            };
+
+
+        case showPrealoder:
+            return {
+                ...state, isFetching: action.isFetching
             };
 
         default:
@@ -133,6 +142,8 @@ export const setProfileU = (profile) => ({type: setProfileUser, profile});
 
 export const setProfileStatus = (status) => ({type: setUserStatus, status});
 
+export const showPrealoderAC = (isFetching) => ({type:showPrealoder, isFetching });
+
 
 export const profileInfoThunkCreator = (userid) => {
     return (dispatch) => {
@@ -148,16 +159,22 @@ export const profileInfoThunkCreator = (userid) => {
 
 export const getProfileStatusThunkCreator = (userid) => {
     return (dispatch) => {
+
         profileAPI.getProfileStatus(userid)
             .then(response => {
+
                 dispatch(setProfileStatus(response.data))
             })
     }
 };
 
 export const updateProfileStatusThunkCreator = (status) => (dispatch) => {
+    dispatch(showPrealoderAC(true));
+
     profileAPI.updateProfileStatus(status)
         .then(response => {
+            dispatch(showPrealoderAC(false));
+
             if (response.data.resultCode === 0) {
                 dispatch(setProfileStatus(status));
             }

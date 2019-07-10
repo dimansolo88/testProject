@@ -15,7 +15,7 @@ let initialeestate = {
     totalUsers: 0,
     quantityUsersOnPage: 5,
     currentPage: 1,
-    isFetching: true,
+    isFetching: false,
     followingProgress: [],
 
 
@@ -29,10 +29,10 @@ const userReducer = (state = initialeestate, action) => {
 
         case follow:
             return {
-                ...state, users: state.users.map(users => {
-                    if (users.id === action.userid)
-                        return {...users, followed: true};
-                    return users
+                ...state, users: state.users.map(u => {
+                    if (u.id === action.userid)
+                        return {...u, followed: true};
+                    return u
                 })
             };
 
