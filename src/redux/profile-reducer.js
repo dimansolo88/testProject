@@ -1,7 +1,6 @@
 import {profileAPI} from "../API/API";
-
 let add_post = "ADD-POST";
-let update_post = "UPDATE-POST";
+// let update_post = "UPDATE-POST";
 // import users from "../assets/images/photoUsersPost.jpg"
 let setProfileUser = "SET-PROFILE-USER";
 let setUserStatus = "SET-PROFILE-STATUS";;
@@ -60,7 +59,7 @@ const profileReducer = (state = initialstate, action) => {
         case add_post:
             let newpost = {
                 id: 5,
-                message: state.textmypost,
+                message: action.post,
                 like: 0,
                 avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
 
@@ -74,11 +73,11 @@ const profileReducer = (state = initialstate, action) => {
             };
         // return stateCopy;
 
-        case update_post:
-            return {
-                ...state,
-                textmypost: action.postext
-            };
+        // case update_post:
+        //     return {
+        //         ...state,
+        //         textmypost: action.postext
+        //     };
         // return stateCopy;
 
         case setProfileUser:
@@ -128,15 +127,15 @@ const profileReducer = (state = initialstate, action) => {
 // return state;
 
 
-export const addpostActionCreator = () => ({
-    type: add_post
+export const addpostActionCreator = (post) => ({
+    type: add_post, post
 });
 
 
-export const updatepostActionCreator = (textposts) => ({
-    type: update_post, postext: textposts
-
-});
+// export const updatepostActionCreator = (textposts) => ({
+//     type: update_post, postext: textposts
+//
+// });
 
 export const setProfileU = (profile) => ({type: setProfileUser, profile});
 
