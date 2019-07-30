@@ -33,7 +33,7 @@ const authReducer = (state = initialstate, action) => {
 };
 
 
-export const authMe = (id,email,login) => ({type:set_AuthMe, payload:{id,email,login}});
+export const authMe = (id, email, login,isAuth) => ({type: set_AuthMe, payload: {id, email, login, isAuth}});
 
 
 export const auhMeThunkCreator = () => {
@@ -41,7 +41,8 @@ export const auhMeThunkCreator = () => {
         profileAPI.authMe()
             .then(response => {
                 let {id, email, login} = response.data.data;
-                if (response.data.resultCode === 0) {dispatch(authMe(id,email,login));
+                if (response.data.resultCode === 0) {
+                    dispatch(authMe(id, email, login));
 
                 }
 
@@ -50,6 +51,14 @@ export const auhMeThunkCreator = () => {
     }
 };
 
+export const loginThunkCreator = (email,password,rememberMe) => (dispatch) => {
+    profileAPI.login(email,password,rememberMe)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(auhMeThunkCreator())
+            }
+        })
+};
 
 
 

@@ -68,5 +68,15 @@ export const profileAPI = {
         return instance.put(`profile/status/`, {status:status})
     },
 
+    login (email,password,rememberMe = false) {
+        return instance.post(`auth/login`, {email,password,rememberMe})
+    },
+
+    logOut () {
+        return instance.delete(`auth/login`)
+    },
+
 };
+
+
 

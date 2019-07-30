@@ -21,7 +21,7 @@ let initialstate = {
     ],
 
 
-    textmessage: "",
+    // textmessage: "",
 
 
 };
@@ -40,10 +40,10 @@ const dialoReducer = (state = initialstate, action) => {
 
 
         case send_message:
-            let textmessage = state.textmessage;
+            let textmessage = action.message;
             return {
                 ...state,
-                textmessage: "",
+                // textmessage: "",
                 messagesdata: [...state.messagesdata, {id: 6, message: textmessage}]
             };
 
@@ -72,8 +72,8 @@ const dialoReducer = (state = initialstate, action) => {
 // return state
 
 
-export const sendMessageCreator = () => ({
-    type: send_message
+export const sendMessageCreator = (message) => ({
+    type: send_message, message
 });
 
 export const updateMessageCreator = (text) => ({

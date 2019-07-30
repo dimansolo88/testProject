@@ -1,0 +1,11 @@
+.showError textarea {
+    border: 2px solid red;
+}
+
+.showError span {
+    background-color: red;
+    color: white;
+
+
+}
+

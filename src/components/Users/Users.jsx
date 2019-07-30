@@ -28,7 +28,7 @@ const Users = (props) => {
 
 
             {quantityPages.map(pages => {
-                return <span key={pages} onClick={(e) => {
+                return <span key={pages} onClick={() => {
                     props.onChanhePage(pages)
                 }}
                              className={props.currentPage ===

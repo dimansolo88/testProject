@@ -32,11 +32,12 @@ const Login = (props) => {
 
 
 
-const mapStateToProps = (state) => {{
-   return {
-       isAuth:state.auth.isAuth
+const mapStateToProps = (state) => {
+   return { isAuth:state.auth.isAuth,
    }
 
-}};
+
+
+};
 
 export default connect (mapStateToProps, {loginThunkCreator}) (Login);

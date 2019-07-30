@@ -3,9 +3,8 @@ import p from './Dialogs.module.css';
 // import {NavLink} from "react-router-dom";
 import Dialogitem from "./Dialogitem/Dialogitem";
 import Dialosmessage from "./Dialosmessage/Dialosmessage";
+import {AddMessageReduxForm} from "./FormSendMessage";
 // import {sendMessageCreator, updateMessageCreator} from "../../redux/dialogs-reducer";
-
-
 
 
 //2
@@ -32,31 +31,37 @@ import Dialosmessage from "./Dialosmessage/Dialosmessage";
 // 1
 const Dialogs = (props) => {
 
-    let states = props.state;
+    const onSubmit = (data) => {
+        console.log(data);
+        props.add(data.dialogSendMessage)
 
+    };
+
+
+
+
+
+    let states = props.state;
 
 
     //let textRef = React.createRef();
 
 
+    // let sendMessage = () => {
+    //     props.add()
+    //
+    //     // props.dispatch(sendMessageCreator());
+    //
+    // };
 
-    let sendMessage = () => {
-        props.add()
-
-        // props.dispatch(sendMessageCreator());
-
-    };
-
-    let changeMessage = (e) => {
-        //let text = textRef.current.value;
-        let text = e.target.value;
-        props.changemess(text)
-
-        // props.dispatch(updateMessageCreator(text))
-
-    };
-
-
+    // let changeMessage = (e) => {
+    //     //let text = textRef.current.value;
+    //     let text = e.target.value;
+    //     props.changemess(text)
+    //
+    //     // props.dispatch(updateMessageCreator(text))
+    //
+    // };
 
 
     //
@@ -72,12 +77,10 @@ const Dialogs = (props) => {
     // ]
 
 
-
-
     let dialogselements =
         states.dialogsdata.map(dialog => <Dialogitem name={dialog.name} key={dialog.id}
                                                      id={dialog.id} avatar={dialog.avatar}/>);
-                                         //передаются props в компоненту
+    //передаются props в компоненту
 
 
     // let messagesdata = [
@@ -91,14 +94,8 @@ const Dialogs = (props) => {
     //
     // ]
 
-let messageelements =
-    states.messagesdata.map(mess => <Dialosmessage message={mess.message} key={mess.id} />);
-
-
-//
-
-
-
+    let messageelements =
+        states.messagesdata.map(mess => <Dialosmessage message={mess.message} key={mess.id}/>);
 
 
     return (
@@ -106,9 +103,7 @@ let messageelements =
             <div className={p.dialogsitems}>
 
 
-
                 {dialogselements}
-
 
 
                 {/*4*/}
@@ -157,25 +152,31 @@ let messageelements =
             <div className={p.messages}>
 
 
-
                 {messageelements}
 
-                <div className={p.send}>
+
+
+
+
+                    {/*<div className={p.send}>*/}
+
+                    {/*    <textarea onChange={changeMessage} placeholder={"enter you message"}*/}
+                    {/*              value={states.textmessage}/>*/}
+
+                    {/*    <div className={p.send}>*/}
+
+                    {/*        <button onClick={sendMessage}> send message</button>*/}
+
+                    {/*    </div>*/}
+
+                    {/*</div>*/}
+
+                <AddMessageReduxForm onSubmit={onSubmit}/>
 
 
 
 
 
-                    <textarea onChange={changeMessage} placeholder={"enter you message"} value={states.textmessage} />
-
-                    <div className={p.send}>
-
-                        <button  onClick={sendMessage} > send message </button>
-
-                    </div>
-
-
-                </div>
 
 
                 {/*refactor map*/}
@@ -202,16 +203,12 @@ let messageelements =
                 {/*    shit*/}
                 {/*</div>*/}
             </div>
-            
-
 
 
         </div>
 
     );
 };
-
-
 
 
 export default Dialogs;
