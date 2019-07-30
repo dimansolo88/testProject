@@ -11,13 +11,15 @@ const Header = (props) => {
            <div className={style.login}>
 
 
-               <NavLink to={ props.isAuth ? "/profile/" : "/login"}  className={style.login}>
+               <NavLink to={ props.isAuth || props.login ? "/profile/" : "/login"}  className={style.login}>
 
-                   {props.isAuth ? props.login : "Login"}  {/*possible to redo*/}
+                   {props.isAuth || props.login ? props.login : "Login"}  {/*possible to redo*/}
 
-
+                   {props.isAuth || props.login ? <button onClick={props.logOut}> log out </button> : ""}
 
                </NavLink>
+
+
            </div>
 
         </header>

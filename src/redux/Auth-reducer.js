@@ -22,7 +22,7 @@ const authReducer = (state = initialstate, action) => {
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true,
+                isAuth: action.payload,
             };
 
         default:
@@ -58,6 +58,19 @@ export const loginThunkCreator = (email,password,rememberMe) => (dispatch) => {
                 dispatch(auhMeThunkCreator())
             }
         })
+};
+
+
+export const logOutThunkCreator = () => (dispatch) => {
+    profileAPI.logOut()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                    dispatch(auhMeThunkCreator(null, null, null, false))
+
+            }
+        })
+
+
 };
 
 
