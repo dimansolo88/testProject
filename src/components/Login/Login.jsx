@@ -10,7 +10,9 @@ import {Redirect} from "react-router-dom";
 const Login = (props) => {
 
     const onSubmit = (data) => {
-        props.loginThunkCreator(data.email, data.password,data.rememberMe)
+        props.loginThunkCreator(data.email, data.password,data.rememberMe);
+
+
 
     };
 
@@ -20,10 +22,17 @@ const Login = (props) => {
 
 
 
+
+
+
+
     return <div className={style.login} >
+
+
 
         <h1> Login </h1>
         <LoginReduxForm onSubmit={onSubmit}/>
+
 
 
 

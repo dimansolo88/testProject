@@ -134,7 +134,7 @@ export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
 
 
 export const followThunkCreator = (id) => {
-    return (dispatch) => {
+    return  (dispatch) => {
         dispatch(toogleDiableBotton(true, id));
 
 
