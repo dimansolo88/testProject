@@ -5,8 +5,6 @@ import style from './textarea.module.css'
 export const Texarea = ({input, meta, ...props}) => {
 
 
-
-
     return (
         <div className={meta.error && meta.touched ? style.showError : ""}>
             <textarea  {...input} {...props} />
@@ -22,13 +20,10 @@ export const Texarea = ({input, meta, ...props}) => {
     )
 
 
-
 };
 
 
 export const Input = ({input, meta, ...props}) => {
-
-
 
 
     return (
@@ -44,7 +39,6 @@ export const Input = ({input, meta, ...props}) => {
 
         </div>
     )
-
 
 
 };

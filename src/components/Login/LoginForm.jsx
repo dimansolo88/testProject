@@ -2,9 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from "redux-form";
 import {required} from "../../Utilites/Validation";
 import {Input} from "../Common/ValidationForm/ValidationTexarea";
-
-
-
+import style from '../Common/ValidationForm/textarea.module.css'
 
 
 const LoginForm = (props) => {
@@ -30,6 +28,11 @@ const LoginForm = (props) => {
 
             </div>
 
+            {props.error && <div className={style.showError}>
+
+                <span> {props.error} </span>
+
+            </div> }
 
             <div>
                 <button> Sign In</button>
@@ -40,8 +43,6 @@ const LoginForm = (props) => {
 
 
         </form>
-
-
 
 
     )
