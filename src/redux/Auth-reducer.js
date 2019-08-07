@@ -39,7 +39,7 @@ export const authMe = (userId, email, login,isAuth) => ({type: set_AuthMe, paylo
 
 export const auhMeThunkCreator = () => {
     return (dispatch) => {
-        profileAPI.authMe()
+   return  profileAPI.authMe()
             .then(response => {
                 let {id, email, login} = response.data.data;
                 if (response.data.resultCode === 0) {
@@ -53,7 +53,7 @@ export const auhMeThunkCreator = () => {
 };
 
 export const loginThunkCreator = (email,password,rememberMe) => (dispatch) => {
-    profileAPI.login(email,password,rememberMe)
+     profileAPI.login(email,password,rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(auhMeThunkCreator())

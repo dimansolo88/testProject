@@ -1,3 +1,4 @@
+import {auhMeThunkCreator} from "./Auth-reducer";
 
 
 let INITIALISATION_AP = 'INITIALISATION_AP';
@@ -18,7 +19,7 @@ const appReducer = (state = initialisateState, action) => {
                 itIsInitialisation: true
             }
         }
-        
+
         default: return state;
 
 
@@ -33,7 +34,12 @@ export const initialisationActionCreator = () => ({
     type:INITIALISATION_AP
 });
 
-export const initialisationThunkCreator = () => (dispatch) => {
+export const initiakisationThunkCreator = () => (dispatch) => {
 
+    Promise.all([dispatch(auhMeThunkCreator())]).then(
+        () => {
+            dispatch(initialisationActionCreator())
+        }
+    )
 };
 

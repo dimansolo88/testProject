@@ -2,34 +2,36 @@ import React, {Component} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-// import Profile from "./components/Profile/Profile";
-// import Dialogs from "./components/Dialogs/Dialogs";
 import {Route, withRouter} from "react-router-dom";
-import News from "./components/Navbar/News/News";
-import Music from "./components/Navbar/Music/Music";
-import Settings from "./components/Navbar/Settings/Settings";
-// import Sitebar from "./components/Navbar/Sitebar/Sitebar";
+import News from "./components/News/News";
+import Music from "./components/Music/Music";
 import DialogsContanier from "./components/Dialogs/DialogsContanier";
 import UsersContanier from "./components/Users/UsersContanier";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {auhMeThunkCreator} from "./redux/Auth-reducer";
 import {compose} from "redux";
-// import Sitebar from './components/Navbar/Sitebar/Sitebar';
+import {initiakisationThunkCreator} from "./redux/App-reducer";
+import Prealoder from "./components/Common/Ptrealoder";
+import SettingsContainer from "./components/Settings/SettingsContainer";
 
 
 class App extends Component {
 
     componentDidMount() {
+        this.props.initialisation()
 
-        this.props.authMe()
+
+
 
     }
 
     render() {
+        if (!this.props.itIsInitialisation) {
+            return <Prealoder/>
 
+        }
 
         return (
 
@@ -44,7 +46,7 @@ class App extends Component {
                     <Route path="/profile/:userid?" render={() => <ProfileContainer/>}/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
-                    <Route path="/settings" component={Settings}/>
+                    <Route path="/settings" component={SettingsContainer}/>
                     <Route path="/users" render={() => <UsersContanier/>}/>
                     <Route path="/login" render={() => <Login/>}/>
 
@@ -61,7 +63,13 @@ class App extends Component {
 }
 
 
+const mapStateToProps = (state) => {
+    return {
+        itIsInitialisation: state.app.itIsInitialisation
+    }
+};
+
 export default  compose (
     withRouter,
-    connect (null, {authMe:auhMeThunkCreator} )) (App);
+    connect (mapStateToProps, {initialisation: initiakisationThunkCreator} )) (App);
 

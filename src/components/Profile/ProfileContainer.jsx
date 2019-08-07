@@ -9,6 +9,7 @@ import {
 import {withRouter} from "react-router-dom";
 // import {WithAthREdirect} from "../HOC/RedirectComponent";
 import {compose} from "redux";
+import {WithAthREdirect} from "../HOC/RedirectComponent";
 
 
 class ProfileContainer extends React.Component {
@@ -66,7 +67,7 @@ export default compose(
     connect(mapStateToProps, {profileInfo: profileInfoThunkCreator,
         getStatus: getProfileStatusThunkCreator,updateStatus: updateProfileStatusThunkCreator}),
     withRouter,
-    // WithAthREdirect
+    WithAthREdirect
 )(ProfileContainer);
 
 
