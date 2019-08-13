@@ -36,7 +36,7 @@ export const initialisationActionCreator = () => ({
 
 export const initiakisationThunkCreator = () => (dispatch) => {
 
-    Promise.all([dispatch(auhMeThunkCreator())]).then(
+     Promise.all([dispatch(auhMeThunkCreator())]).then(
         () => {
             dispatch(initialisationActionCreator())
         }

@@ -19,7 +19,11 @@ class ProfileContainer extends React.Component {
 
         let userid = this.props.match.params.userid;
         if (!userid) {
-            userid = 1068
+            userid = this.props.autorizedUserId;
+            if (!userid) {
+                this.props.history.push('login')
+
+            }
 
         }
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userid)
@@ -57,6 +61,7 @@ let mapStateToProps = (state) => {
         isAuth: state.auth.isAuth,
         status: state.profilepage.status,
         isFetching:state.profilepage.isFetching,
+        autorizedUserId: state.auth.userId
 
 
     }

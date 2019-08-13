@@ -9,34 +9,7 @@ let showPrealoder = "SHOW-PREALODER";
 
 let initialstate = {
 
-    postdata: [
-        {
-            id: 1,
-            avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
-            message: "today i in first time eated a dog shit, it was great, and me nowbody seen ",
-            like: "1200"
-        },
-        {
-            id: 2,
-            avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
-            message: "hi",
-            like: "34",
-        },
-        {
-            id: 3,
-            avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
-            message: "t is mt first podt",
-            like: "0",
-        },
-        {
-            id: 4,
-            avatar: "https://www.meme-arsenal.com/memes/3a75d4f2bb6ed66a449fdb8d7836712b.jpg",
-            message: "all is worse",
-            like: "0",
-        },
-
-
-    ],
+    postdata: [],
 
 
     textmypost: "jjj",
