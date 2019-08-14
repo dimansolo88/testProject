@@ -26,8 +26,7 @@ const Dialogs = (props) => {
 
 
     let dialogselements =
-        states.dialogsdata.map(dialog => <Dialogitem name={dialog.name} key={dialog.id}
-                                                     id={dialog.id} avatar={dialog.avatar}/>);
+        states.dialogsdata.map(dialog => <Dialogitem key={dialog.id} name={dialog.userName} date={dialog.lastDialogActivityDate}  />);
 
 
     let messageelements =
