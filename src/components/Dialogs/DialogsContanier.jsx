@@ -1,22 +1,26 @@
-import {sendMessageCreator} from "../../redux/dialogs-reducer";
+import {getDialogsThunkCreator, sendMessageCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import React from "react";
+import React, {Component} from "react";
 import {compose} from "redux";
 import {WithAthREdirect} from "../HOC/RedirectComponent";
 import {withRouter} from "react-router-dom";
 
 
+class DialogsContanier extends Component {
+    componentDidMount() {
+        this.props.getDialogs()
+    }
+
+    render() {
+        return (
+
+            <Dialogs {...this.props}/>
 
 
-const DialogsContanier = (props) =>  {
-    return (
-
-        <Dialogs {...props}/>
-
-
-    )
-};
+        )
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -28,19 +32,19 @@ const mapStateToProps = (state) => {
 
 
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        add: (message) => {
-            dispatch(sendMessageCreator(message));
-
-        },
-        // changemess: (text) => {
-        //            dispatch(updateMessageCreator(text))
-        //         }
-
-    }
-
-};
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         add: (message) => {
+//             dispatch(sendMessageCreator(message));
+//
+//         },
+//         // changemess: (text) => {
+//         //            dispatch(updateMessageCreator(text))
+//         //         }
+//
+//     }
+//
+// };
 
 //
 
@@ -48,6 +52,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default compose (
-connect (mapStateToProps, mapDispatchToProps), withRouter, WithAthREdirect)(DialogsContanier);
+connect (mapStateToProps, {add:sendMessageCreator, getDialogs:getDialogsThunkCreator})
+    , withRouter, WithAthREdirect)(DialogsContanier);
 
 
