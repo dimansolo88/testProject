@@ -4,21 +4,11 @@ let update_message = "UPDATE-MESSAGE";
 
 let initialstate = {
 
-    dialogsdata: [
-        {id: "alina", name: "Alina", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
-        {id: "bazil", name: "Bazil", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
-        {id: "matsal", name: "Matsal", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
-        {id: "herman", name: "Herman", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"},
-        {id: "timur", name: "Timur", avatar: "http://i.imgur.com/Ax0Kfaj.jpg"}
-    ],
+    dialogsdata: [],
 
-    messagesdata: [
-        {id: "1", message: "hi",},
-        {id: "2", message: "Hi gays",},
-        {id: "3", message: "shit",},
-        {id: "4", message: "hi i am herman",},
-        {id: "5", message: "hi am timur",},
-    ],
+    messagesdata: [],
+
+    selectedDialogId: null,
 
 
     // textmessage: "",
