@@ -10,6 +10,7 @@ import {AddMessageReduxForm} from "./FormSendMessage";
 
 const Dialogs = (props) => {
 
+
     const onSubmit = (data) => {
         console.log(data);
         props.add(data.dialogSendMessage)
@@ -18,19 +19,12 @@ const Dialogs = (props) => {
 
 
 
-
-
-    let states = props.state;
-
-
-
-
     let dialogselements =
-        states.dialogsdata.map(dialog => <Dialogitem key={dialog.id} name={dialog.userName} date={dialog.lastDialogActivityDate}  />);
+        props.dialogsdata.map(dialog => <Dialogitem key={dialog.id} id={dialog.id} name={dialog.userName} date={dialog.lastDialogActivityDate}  />);
 
 
-    let messageelements =
-        states.messagesdata.map(mess => <Dialosmessage message={mess.message} key={mess.id}/>);
+    // let messageelements =
+    //     props.messagesdata.map(mess => <Dialosmessage message={mess.message} key={mess.id}/>);
 
 
     return (
@@ -47,21 +41,11 @@ const Dialogs = (props) => {
 
 
             <div className={p.messages}>
+                <Dialosmessage messagesdata={props.messagesdata}/>
+                {/*{messageelements}*/}
 
 
-                {messageelements}
-
-
-
-
-
-
-
-                <AddMessageReduxForm onSubmit={onSubmit}/>
-
-
-
-
+                <AddMessageReduxForm {...props} selectedDialogId={props.selectedDialogId} onSubmit={onSubmit}/>
 
 
 

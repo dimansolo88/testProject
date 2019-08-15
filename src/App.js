@@ -42,7 +42,7 @@ class App extends Component {
                 <Navbar/>
                 <div className="app-wrapper-content">
 
-                    <Route path="/dialogs" render={() => <DialogsContanier/>}/>
+                    <Route path="/dialogs/:userId?" render={() => <DialogsContanier  />}/>
                     <Route path="/profile/:userid?" render={() => <ProfileContainer/>}/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>

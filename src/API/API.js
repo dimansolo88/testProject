@@ -110,8 +110,13 @@ export const dialogsAPI = {
 
     },
 
-    putTopDialog(userId) {
+    startDialog(userId) {
         return instance.put(`dialogs${userId}`)
+            .then(response => response.data)
+    },
+
+    getMessages(userId) {
+        return instance.get(`dialogs/${userId}/messages`)
             .then(response => response.data)
     }
 

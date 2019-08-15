@@ -5,14 +5,18 @@ import {maxLengthCreator, minLengthCreator} from "../../Utilites/Validation";
 import {Texarea} from "../Common/ValidationForm/ValidationTexarea";
 
 
-
 const maxLength5 = maxLengthCreator(5);
 const minLength = minLengthCreator(1);
 
 const AddMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div className={p.send}>
+
+            {!props.currentDialogId && <div>
+                please select dialog
+            </div> }
+
+            {props.currentDialogId &&  <div className={p.send}>
 
                 <Field component={Texarea} name={"dialogSendMessage"}
                        validate={[maxLength5, minLength ]} placeholder={"enter you message"}/>
@@ -23,7 +27,19 @@ const AddMessageForm = (props) => {
 
                 </div>
 
-            </div>
+            </div> }
+            {/*<div className={p.send}>*/}
+
+            {/*    <Field component={Texarea} name={"dialogSendMessage"}*/}
+            {/*           validate={[maxLength5, minLength ]} placeholder={"enter you message"}/>*/}
+
+            {/*    <div className={p.send}>*/}
+
+            {/*        <button>send message</button>*/}
+
+            {/*    </div>*/}
+
+            {/*</div>*/}
 
 
         </form>
@@ -33,7 +49,7 @@ const AddMessageForm = (props) => {
 };
 
 
-export const AddMessageReduxForm = reduxForm ({form: 'dialog-message-form'}) (AddMessageForm);
+export const AddMessageReduxForm = reduxForm({form: 'dialog-message-form'})(AddMessageForm);
 
 // export default AddMessageForm;
 
