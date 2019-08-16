@@ -6,6 +6,7 @@ let get_dialogs_success = "GET-DIALOGS-SUCCESS";
 let PUT_UP_DIALOG = "PUT_UP_DIALOG";
 let GET_MESSAGES = "GET_MESSAGES";
 let SET_SELECT_DIALOG_ID = "SET_SELECT_DIALOG_ID";
+let SEND_MESSAGES_SUCCESS = "SEND_MESSAGES_SUCCESS";
 
 
 let initialstate = {
@@ -49,6 +50,12 @@ const dialoReducer = (state = initialstate, action) => {
             return {
                 ...state,selectedDialogId: action.payload
             };
+
+        case SEND_MESSAGES_SUCCESS:
+            debugger
+            return {
+                ...state,messagesdata: [...state.messagesdata,action.messages.data.message]
+            }
 
 
         // case update_message:
@@ -98,6 +105,11 @@ export const putUpActionCreator = (userId) => ({
     type: PUT_UP_DIALOG, userId
 });
 
+export const sendMessageSuccessActionCreator = (messages) => ({
+    type:SEND_MESSAGES_SUCCESS, messages
+
+})
+
 
 export const getDialogsThunkCreator = () => (dispatch) => {
     dialogsAPI.getDialogs().then(dialogs => {
@@ -108,6 +120,7 @@ export const getDialogsThunkCreator = () => (dispatch) => {
 };
 
 export const getMessagesThunkCreator = (userId) => (dispatch) => {
+
     dialogsAPI.getMessages(userId).then(messages => {
         dispatch(getMessagesSuccessActionCreator(messages))
     })
@@ -115,7 +128,7 @@ export const getMessagesThunkCreator = (userId) => (dispatch) => {
 
 
 export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
-    dialogsAPI.startDialog(userId).then(res => {
+    return  dialogsAPI.startDialog(userId).then(res => {
         let dialogs = getState().dialogspages.dialogsdata.find(d => d.id == userId)
         if (dialogs) {
             dispatch(putUpActionCreator(userId))
@@ -123,6 +136,15 @@ export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
             dispatch(getDialogsThunkCreator())
         }
     })
+
+
+};
+
+
+export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
+    debugger
+   let message = await  dialogsAPI.sendMessage(userId,body);
+    dispatch(sendMessageSuccessActionCreator(message))
 
 
 };

@@ -5,7 +5,7 @@ import {maxLengthCreator, minLengthCreator} from "../../Utilites/Validation";
 import {Texarea} from "../Common/ValidationForm/ValidationTexarea";
 
 
-const maxLength5 = maxLengthCreator(5);
+const maxLength5 = maxLengthCreator(30);
 const minLength = minLengthCreator(1);
 
 const AddMessageForm = (props) => {

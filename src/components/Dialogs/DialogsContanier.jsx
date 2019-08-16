@@ -1,7 +1,7 @@
 import {
     getDialogsThunkCreator,
     getMessagesThunkCreator, selectDialogActionCreator,
-    sendMessageCreator,
+    sendMessageCreator, sendMessageThunkCreator,
     startDialogThunkCreator
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
@@ -25,6 +25,28 @@ class DialogsContanier extends Component {
         this.props.getDialogs()
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+            if (prevProps.match.params.userId !== this.props.match.params.userId) {
+                let userId =  this.props.match.params.userId;
+                if (!!userId) {
+                    this.props.getMessages(userId);
+                    this.props.setDialogId(userId);
+
+                }
+
+                else {
+                    this.props.setDialogId(null);
+                }
+
+            }
+
+
+
+
+
+    }
+
     render() {
 
         return (
@@ -43,6 +65,7 @@ const mapStateToProps = (state) => {
         isAuth: state.auth.isAuth,
         selectedDialogId:state.dialogspages.selectedDialogId,
         currentDialogId:state.dialogspages.currentDialogId,
+
 }
 
 };
@@ -71,7 +94,8 @@ const mapStateToProps = (state) => {
 export default compose (
 connect (mapStateToProps, {add:sendMessageCreator,
     getDialogs:getDialogsThunkCreator,
-    startDialog:startDialogThunkCreator,getMessages:getMessagesThunkCreator,setDialogId:selectDialogActionCreator })
+    startDialog:startDialogThunkCreator,getMessages:getMessagesThunkCreator,
+    setDialogId:selectDialogActionCreator, sendMessage:sendMessageThunkCreator })
     , withRouter , WithAthREdirect)(DialogsContanier);
 
 

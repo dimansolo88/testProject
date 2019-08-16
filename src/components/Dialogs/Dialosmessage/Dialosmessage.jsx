@@ -1,8 +1,10 @@
 import React from "react";
 import p from "../Dialogs.module.css";
+import Prealoder from "../../Common/Ptrealoder";
 
 
 const Dialosmessage = (props) => {
+
 
     return (
 
@@ -10,6 +12,7 @@ const Dialosmessage = (props) => {
             <div>
                 messages
             </div>
+
 
             <div>
                 {props.messagesdata.map(m => <div key={m.id}>

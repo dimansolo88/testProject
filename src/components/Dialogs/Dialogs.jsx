@@ -13,11 +13,10 @@ const Dialogs = (props) => {
 
     const onSubmit = (data) => {
         console.log(data);
-        props.add(data.dialogSendMessage)
+        // props.add(data);
+        props.sendMessage(props.match.params.userId, data.dialogSendMessage);
 
     };
-
-
 
 
     let dialogselements =
@@ -43,7 +42,7 @@ const Dialogs = (props) => {
 
 
             <div className={p.messages}>
-                <Dialosmessage messagesdata={props.messagesdata}/>
+                <Dialosmessage  messagesdata={props.messagesdata}/>
                 {/*{messageelements}*/}
 
 
