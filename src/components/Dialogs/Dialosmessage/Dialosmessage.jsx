@@ -3,6 +3,7 @@ import p from "../Dialogs.module.css";
 
 
 const Dialosmessage = (props) => {
+
     return (
 
         <div className={p.message}>
@@ -12,19 +13,26 @@ const Dialosmessage = (props) => {
 
             <div>
                 {props.messagesdata.map(m => <div key={m.id}>
+
+
                     <div>
-                        {m.message}
+                        <b> {m.senderName}: </b>
+                        <span> {m.addedAt} </span>
+
+                    </div>
+
+                    <div>
+                        {m.body}
                     </div>
 
 
                 </div>)}
 
 
-                {/*{props.message}*/}
             </div>
         </div>
 
-)
+    )
 
 };
 

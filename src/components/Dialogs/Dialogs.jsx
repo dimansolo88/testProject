@@ -19,6 +19,7 @@ const Dialogs = (props) => {
 
 
 
+
     let dialogselements =
         props.dialogsdata.map(dialog => <Dialogitem key={dialog.id} id={dialog.id} name={dialog.userName} date={dialog.lastDialogActivityDate}  />);
 
@@ -38,6 +39,7 @@ const Dialogs = (props) => {
 
 
             </div>
+
 
 
             <div className={p.messages}>

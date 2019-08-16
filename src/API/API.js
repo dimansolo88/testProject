@@ -117,7 +117,7 @@ export const dialogsAPI = {
 
     getMessages(userId) {
         return instance.get(`dialogs/${userId}/messages`)
-            .then(response => response.data)
+            .then(response => response.data.items)
     }
 
 

@@ -12,11 +12,11 @@ const AddMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
 
-            {!props.currentDialogId && <div>
+            {!props.selectedDialogId && <div>
                 please select dialog
             </div> }
 
-            {props.currentDialogId &&  <div className={p.send}>
+            {props.selectedDialogId &&  <div className={p.send}>
 
                 <Field component={Texarea} name={"dialogSendMessage"}
                        validate={[maxLength5, minLength ]} placeholder={"enter you message"}/>
