@@ -52,9 +52,8 @@ const dialoReducer = (state = initialstate, action) => {
             };
 
         case SEND_MESSAGES_SUCCESS:
-            debugger
             return {
-                ...state,messagesdata: [...state.messagesdata,action.messages.data.message]
+                ...state,messagesdata: [...state.messagesdata,action.messages]
             }
 
 
@@ -82,9 +81,9 @@ const dialoReducer = (state = initialstate, action) => {
 };
 
 
-export const sendMessageCreator = (message) => ({
-    type: send_message, message
-});
+// export const sendMessageCreator = (message) => ({
+//     type: send_message, message
+// });
 
 
 export const getDialogsSuccessActionCreator = (dialogs) => ({
@@ -142,9 +141,17 @@ export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
 
 
 export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
-    debugger
+
    let message = await  dialogsAPI.sendMessage(userId,body);
-    dispatch(sendMessageSuccessActionCreator(message))
+   if (message.resultCode == 0) {
+       dispatch(sendMessageSuccessActionCreator(message.data.message))
+
+       dispatch(putUpActionCreator(userId))
+
+
+
+   }
+
 
 
 };

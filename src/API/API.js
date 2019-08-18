@@ -122,10 +122,7 @@ export const dialogsAPI = {
 
     sendMessage (userId, body) {
         return instance.post(`dialogs/${userId}/messages`, {body})
-            .then(response => {
-                debugger
-                return response.data
-            })
+            .then(response => response.data)
     },
 
 

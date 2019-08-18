@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import { logOutThunkCreator} from "../../redux/Auth-reducer";
-// import * as axios from 'axios';
+import {getAuthMe} from "../../redux/Selectors/ProfileSelector";
 
 class HeaderContainer extends React.Component {
 
@@ -21,7 +21,8 @@ class HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth,
+        // isAuth: state.auth.isAuth,
+        isAuth: getAuthMe(state),
         login: state.auth.login,
 
     }

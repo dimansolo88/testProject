@@ -10,6 +10,7 @@ import {withRouter} from "react-router-dom";
 // import {WithAthREdirect} from "../HOC/RedirectComponent";
 import {compose} from "redux";
 import {WithAthREdirect} from "../HOC/RedirectComponent";
+import {getAuthMe, getUserProfile} from "../../redux/Selectors/ProfileSelector";
 
 
 class ProfileContainer extends React.Component {
@@ -57,8 +58,10 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        setProfileUser: state.profilepage.setProfileUs,
-        isAuth: state.auth.isAuth,
+        // setProfileUser: state.profilepage.setProfileUs,
+        setProfileUser: getUserProfile(state),
+        // isAuth: state.auth.isAuth,
+        isAuth: getAuthMe(state),
         status: state.profilepage.status,
         isFetching:state.profilepage.isFetching,
         autorizedUserId: state.auth.userId

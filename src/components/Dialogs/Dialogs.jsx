@@ -16,6 +16,7 @@ const Dialogs = (props) => {
         // props.add(data);
         props.sendMessage(props.match.params.userId, data.dialogSendMessage);
 
+
     };
 
 

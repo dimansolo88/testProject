@@ -9,7 +9,7 @@ const Dialogitem = (props) => {
 
         <div className={style.items}>
             <img src={ava} alt="avatar" className={style.avatar}/>
-            <NavLink to={"/dialogs/" + props.id} className={style.link}>  {props.name} </NavLink>
+            <NavLink to={"/dialogs/" + props.id} className={style.link} activeClassName={style.active}>  {props.name} </NavLink>
             <span className={style.formatDate}>
                 {props.date}
             </span>

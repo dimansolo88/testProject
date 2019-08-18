@@ -1,7 +1,7 @@
 import {
     getDialogsThunkCreator,
     getMessagesThunkCreator, selectDialogActionCreator,
-    sendMessageCreator, sendMessageThunkCreator,
+     sendMessageThunkCreator,
     startDialogThunkCreator
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
@@ -10,6 +10,7 @@ import React, {Component} from "react";
 import {compose} from "redux";
 import {WithAthREdirect} from "../HOC/RedirectComponent";
 import {withRouter} from "react-router-dom";
+import {getAuthMe} from "../../redux/Selectors/ProfileSelector";
 
 
 class DialogsContanier extends Component {
@@ -30,6 +31,7 @@ class DialogsContanier extends Component {
             if (prevProps.match.params.userId !== this.props.match.params.userId) {
                 let userId =  this.props.match.params.userId;
                 if (!!userId) {
+                    // this.props.startDialog(userId);
                     this.props.getMessages(userId);
                     this.props.setDialogId(userId);
 
@@ -62,7 +64,8 @@ const mapStateToProps = (state) => {
     return {
         dialogsdata:state.dialogspages.dialogsdata,
         messagesdata: state.dialogspages.messagesdata,
-        isAuth: state.auth.isAuth,
+        // isAuth: state.auth.isAuth,
+        isAuth: getAuthMe(state),
         selectedDialogId:state.dialogspages.selectedDialogId,
         currentDialogId:state.dialogspages.currentDialogId,
 
@@ -92,7 +95,7 @@ const mapStateToProps = (state) => {
 
 
 export default compose (
-connect (mapStateToProps, {add:sendMessageCreator,
+connect (mapStateToProps, {
     getDialogs:getDialogsThunkCreator,
     startDialog:startDialogThunkCreator,getMessages:getMessagesThunkCreator,
     setDialogId:selectDialogActionCreator, sendMessage:sendMessageThunkCreator })
