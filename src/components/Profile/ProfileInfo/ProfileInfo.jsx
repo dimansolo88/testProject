@@ -2,7 +2,8 @@ import React from "react";
 import style from './ProfileInfo.module.css';
 import Prealoder from "../../Common/Ptrealoder";
 import photos from '../../../assets/images/userPhoto.jpg'
-import ProfileStatus from "./ProfileStatus";
+// import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHook from "./WithHook";
 
 
 const ProfileInfo = (props) => {
@@ -23,7 +24,7 @@ const ProfileInfo = (props) => {
 
                 <img src={props.setProfileUser.photos.large != null ? props.setProfileUser.photos.large
                     : photos} alt="ProfilePhoto"/>
-                    <ProfileStatus {...props}  />
+                    <ProfileStatusWithHook {...props}  />
 
                 <span className={style.web}>
 
