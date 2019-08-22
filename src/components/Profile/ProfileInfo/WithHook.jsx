@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import Prealoder from "../../Common/Ptrealoder";
 
 const ProfileStatusWithHook = (props) => {
@@ -24,6 +24,10 @@ const ProfileStatusWithHook = (props) => {
        props.updateStatus(status)
 
    };
+
+   useEffect(() => {
+       setStatus(props.status)
+   }, [props.status] );
 
 
         if (props.status === null) {  // to fix
