@@ -22,16 +22,15 @@ import {newCountThunkCreator} from "./redux/dialogs-reducer";
 class App extends Component {
 
     componentDidMount() {
-        this.props.initialisation()
+        this.props.initialisation();
         // this.props.newMessagesCount()
         this.props.newMessagesCount()
 
-
-
     }
 
+
     // componentWillUnmount() {
-    //
+    //     this.props.newMessagesCount()
     //
     //
     // }
@@ -55,7 +54,7 @@ class App extends Component {
 
 
             <div className="app-wrapper">
-                {this.props.newMessagesCount > 0 && <div className="notification"> new message: {this.props.newMessagesCount}  </div>}
+                {this.props.messagesCount > 0 && <div className="notification"> new message: {this.props.messagesCount}  </div>}
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
@@ -84,7 +83,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         itIsInitialisation: state.app.itIsInitialisation,
-        newMessagesCount: getNewMessagesCount(state),
+        messagesCount: getNewMessagesCount(state),
     }
 };
 

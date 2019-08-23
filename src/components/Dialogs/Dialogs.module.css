@@ -52,8 +52,8 @@
 
 
 .avatar{
-    width: 15px;
-    height: 15px;
+    width: 50px;
+    height: 50px;
     border-radius: 50px;
 
 }
@@ -61,6 +61,21 @@
 .formatDate{
     font-size: 8px;
 }
+
+.count{
+    font-weight: bold;
+    text-align: center;
+    padding: 1px;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    color: white;
+    background-color: deepskyblue;
+    border-radius:50%;
+}
+
+
+
 
 
 

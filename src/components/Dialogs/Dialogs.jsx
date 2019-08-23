@@ -21,7 +21,8 @@ const Dialogs = (props) => {
 
 
     let dialogselements =
-        props.dialogsdata.map(dialog => <Dialogitem key={dialog.id} id={dialog.id} name={dialog.userName} date={dialog.lastDialogActivityDate}  />);
+        props.dialogsdata.map(dialog => <Dialogitem key={dialog.id} id={dialog.id} name={dialog.userName} date={dialog.lastDialogActivityDate}
+                                                    hasNewMessages={dialog.hasNewMessages} photos={dialog.photos} countMessages={dialog.newMessagesCount} />);
 
 
     // let messageelements =
