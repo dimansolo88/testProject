@@ -15,17 +15,35 @@ import {compose} from "redux";
 import {initiakisationThunkCreator} from "./redux/App-reducer";
 import Prealoder from "./components/Common/Ptrealoder";
 import SettingsContainer from "./components/Settings/SettingsContainer";
+import {getNewMessagesCount} from "./redux/Selectors/AppSelector";
+import {newCountThunkCreator} from "./redux/dialogs-reducer";
 
 
 class App extends Component {
 
     componentDidMount() {
         this.props.initialisation()
-
+        // this.props.newMessagesCount()
+        this.props.newMessagesCount()
 
 
 
     }
+
+    // componentWillUnmount() {
+    //
+    //
+    //
+    // }
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     setInterval(() => {
+    //         this.props.newMessagesCount()
+    //     }, 10000)
+    // }
+
+
+
 
     render() {
         if (!this.props.itIsInitialisation) {
@@ -37,7 +55,7 @@ class App extends Component {
 
 
             <div className="app-wrapper">
-
+                {this.props.newMessagesCount > 0 && <div className="notification"> new message: {this.props.newMessagesCount}  </div>}
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
@@ -65,11 +83,13 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        itIsInitialisation: state.app.itIsInitialisation
+        itIsInitialisation: state.app.itIsInitialisation,
+        newMessagesCount: getNewMessagesCount(state),
     }
 };
 
 export default  compose (
     withRouter,
-    connect (mapStateToProps, {initialisation: initiakisationThunkCreator} )) (App);
+    connect (mapStateToProps, {initialisation: initiakisationThunkCreator,
+    newMessagesCount: newCountThunkCreator} )) (App);
 

@@ -7,16 +7,16 @@ let PUT_UP_DIALOG = "PUT_UP_DIALOG";
 let GET_MESSAGES = "GET_MESSAGES";
 let SET_SELECT_DIALOG_ID = "SET_SELECT_DIALOG_ID";
 let SEND_MESSAGES_SUCCESS = "SEND_MESSAGES_SUCCESS";
+let GET_MESSAGES_COUNT_SUCCESS = "GET_MESSAGES_COUNT_SUCCESS";
 
 
 let initialstate = {
 
 
     dialogsdata: [],
-
     messagesdata: [],
-
     selectedDialogId: null,
+    newMessagesCount: 0,
 
 
     // textmessage: "",
@@ -37,7 +37,7 @@ const dialoReducer = (state = initialstate, action) => {
 
         case GET_MESSAGES:
             return {
-                ...state,messagesdata: action.payload
+                ...state, messagesdata: action.payload
             };
 
         case PUT_UP_DIALOG:
@@ -48,13 +48,18 @@ const dialoReducer = (state = initialstate, action) => {
 
         case SET_SELECT_DIALOG_ID:
             return {
-                ...state,selectedDialogId: action.payload
+                ...state, selectedDialogId: action.payload
             };
 
         case SEND_MESSAGES_SUCCESS:
             return {
-                ...state,messagesdata: [...state.messagesdata,action.messages]
+                ...state, messagesdata: [...state.messagesdata, action.messages]
             }
+
+        case GET_MESSAGES_COUNT_SUCCESS:
+            return {
+                ...state, newMessagesCount: action.count
+            };
 
 
         // case update_message:
@@ -96,7 +101,7 @@ export const getMessagesSuccessActionCreator = (messages) => ({
 });
 
 export const selectDialogActionCreator = (userId) => ({
-    type:SET_SELECT_DIALOG_ID, payload: userId
+    type: SET_SELECT_DIALOG_ID, payload: userId
 })
 
 
@@ -105,7 +110,12 @@ export const putUpActionCreator = (userId) => ({
 });
 
 export const sendMessageSuccessActionCreator = (messages) => ({
-    type:SEND_MESSAGES_SUCCESS, messages
+    type: SEND_MESSAGES_SUCCESS, messages
+
+})
+
+export const getMessagesCountActionCreator = (count) => ({
+    type: GET_MESSAGES_COUNT_SUCCESS, count
 
 })
 
@@ -127,7 +137,7 @@ export const getMessagesThunkCreator = (userId) => (dispatch) => {
 
 
 export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
-    return  dialogsAPI.startDialog(userId).then(res => {
+    return dialogsAPI.startDialog(userId).then(res => {
         let dialogs = getState().dialogspages.dialogsdata.find(d => d.id == userId)
         if (dialogs) {
             dispatch(putUpActionCreator(userId))
@@ -140,21 +150,29 @@ export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
 };
 
 
+
+
+
 export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
 
-   let message = await  dialogsAPI.sendMessage(userId,body);
-   if (message.resultCode == 0) {
-       dispatch(sendMessageSuccessActionCreator(message.data.message))
+    let message = await dialogsAPI.sendMessage(userId, body);
+    if (message.resultCode == 0) {
+        dispatch(sendMessageSuccessActionCreator(message.data.message))
 
-       dispatch(putUpActionCreator(userId))
-
-
-
-   }
+        dispatch(putUpActionCreator(userId))
 
 
+    }
 
 };
+
+
+export const newCountThunkCreator = () => async (dispatch) => {
+    let count = await dialogsAPI.getNewMessagesCount();
+    dispatch(getMessagesCountActionCreator(count))
+
+
+}
 
 
 export default dialoReducer;

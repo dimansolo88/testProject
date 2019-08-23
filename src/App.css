@@ -20,6 +20,16 @@
 
 }
 
+.notification{
+    position: absolute;
+    left: 50px;
+    top: 25px;
+    border: white 2px solid;
+    color:red;
+    background-color: white;
+
+}
+
 
 /*.App {*/
 /*  text-align: center;*/

@@ -126,6 +126,11 @@ export const dialogsAPI = {
             
     },
 
+    getNewMessagesCount () {
+        return instance.get(`dialogs/messages/new/count`)
+            .then(res => res.data)
+    }
+
 
 };
 
