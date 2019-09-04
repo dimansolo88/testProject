@@ -7,5 +7,5 @@ const getNewMessagesCountSelector = (state) => {
 
 export const getNewMessagesCount = createSelector(getNewMessagesCountSelector, (newMessagesCount) => {
     return newMessagesCount
-} )
+});
 

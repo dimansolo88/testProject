@@ -8,7 +8,8 @@ import {AddMessageReduxForm} from "./FormSendMessage";
 
 
 
-const Dialogs = (props) => {
+const Dialogs = React.memo ((props) => {
+
 
 
     const onSubmit = (data) => {
@@ -18,6 +19,7 @@ const Dialogs = (props) => {
 
 
     };
+
 
 
     let dialogselements =
@@ -58,7 +60,7 @@ const Dialogs = (props) => {
         </div>
 
     );
-};
+});
 
 
 export default Dialogs;

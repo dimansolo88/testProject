@@ -2,7 +2,7 @@ import {dialogsAPI} from "../API/API";
 
 let send_message = "SEND-MESSAGE";
 let update_message = "UPDATE-MESSAGE";
-let get_dialogs_success = "GET-DIALOGS-SUCCESS";
+let get_dialogs_success = "SN/DIALOGS/GET-DIALOGS-SUCCESS";
 let PUT_UP_DIALOG = "PUT_UP_DIALOG";
 let GET_MESSAGES = "GET_MESSAGES";
 let SET_SELECT_DIALOG_ID = "SET_SELECT_DIALOG_ID";
@@ -60,6 +60,8 @@ const dialoReducer = (state = initialstate, action) => {
             return {
                 ...state, newMessagesCount: action.count
             };
+
+
 
 
         // case update_message:
@@ -120,9 +122,12 @@ export const getMessagesCountActionCreator = (count) => ({
 })
 
 
+
+
 export const getDialogsThunkCreator = () => (dispatch) => {
     dialogsAPI.getDialogs().then(dialogs => {
         dispatch(getDialogsSuccessActionCreator(dialogs))
+
     })
 
 
@@ -131,22 +136,19 @@ export const getDialogsThunkCreator = () => (dispatch) => {
 export const getMessagesThunkCreator = (userId) => (dispatch) => {
 
     dialogsAPI.getMessages(userId).then(messages => {
-        dispatch(getMessagesSuccessActionCreator(messages))
+        dispatch(getMessagesSuccessActionCreator(messages));
     })
 }
 
 
 export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
-    return dialogsAPI.startDialog(userId).then(res => {
+    return dialogsAPI.startDialog(userId);
         let dialogs = getState().dialogspages.dialogsdata.find(d => d.id == userId)
         if (dialogs) {
             dispatch(putUpActionCreator(userId))
         } else {
             dispatch(getDialogsThunkCreator())
         }
-    })
-
-
 };
 
 

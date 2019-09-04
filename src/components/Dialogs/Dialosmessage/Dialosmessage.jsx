@@ -1,6 +1,5 @@
 import React from "react";
 import p from "../Dialogs.module.css";
-import Prealoder from "../../Common/Ptrealoder";
 
 
 const Dialosmessage = (props) => {

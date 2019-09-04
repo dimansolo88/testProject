@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route, withRouter} from "react-router-dom";
+import Redirect, {Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import DialogsContanier from "./components/Dialogs/DialogsContanier";
@@ -17,6 +17,7 @@ import Prealoder from "./components/Common/Ptrealoder";
 import SettingsContainer from "./components/Settings/SettingsContainer";
 import {getNewMessagesCount} from "./redux/Selectors/AppSelector";
 import {newCountThunkCreator} from "./redux/dialogs-reducer";
+// import {SiteTemplate} from "./components/HOC/RedirectComponent";
 
 
 class App extends Component {
@@ -69,6 +70,10 @@ class App extends Component {
 
 
                 </div>
+
+
+{/*<SiteTemplate header={() => { return  <div>security</div>}}  mainContent={() => <input />} />*/}
+
 
 
             </div>
