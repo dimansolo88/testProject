@@ -5,6 +5,7 @@ let add_post = "ADD-POST";
 let setProfileUser = "SET-PROFILE-USER";
 let setUserStatus = "SET-PROFILE-STATUS";;
 let showPrealoder = "SHOW-PREALODER";
+let DELETE_POST = "DELETE_POST";
 
 
 let initialstate = {
@@ -44,6 +45,13 @@ const profileReducer = (state = initialstate, action) => {
                 // stateCopy.postdata.push(newpost);
                 textmypost: ""
             };
+
+        case DELETE_POST:
+            return {
+            ...state,postdata: state.postdata.filter(p => p.id !== action.postId )
+        }
+
+
         // return stateCopy;
 
         // case update_post:
@@ -103,6 +111,10 @@ const profileReducer = (state = initialstate, action) => {
 export const addpostActionCreator = (post) => ({
     type: add_post, post
 });
+
+export const deleteActionCreator = (postId) => ({
+    type:DELETE_POST, postId
+})
 
 
 // export const updatepostActionCreator = (textposts) => ({
