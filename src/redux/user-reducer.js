@@ -1,4 +1,5 @@
 import {usersAPI} from "../API/API";
+import {updateObjInArray} from "../Utilites/updateObjInArray";
 
 let follow = "FOLLOW";
 let unfollow = "UNFOLLOW";
@@ -29,20 +30,24 @@ const userReducer = (state = initialeestate, action) => {
 
         case follow:
             return {
-                ...state, users: state.users.map(u => {
-                    if (u.id === action.userid)
-                        return {...u, followed: true};
-                    return u
-                })
+                ...state,users: updateObjInArray(state.users,action.userid,"id",
+                    {followed: true})
+                // users: state.users.map(u => {
+                //     if (u.id === action.userid)
+                //         return {...u, followed: true};
+                //     return u
+                // })
             };
 
         case unfollow:
             return {
-                ...state, users: state.users.map(users => {
-                    if (users.id === action.userid)
-                        return {...users, followed: false};
-                    return users
-                })
+                ...state, users:updateObjInArray(state.users,action.userid,"id",
+                    {followed: false})
+                // users: state.users.map(users => {
+                //     if (users.id === action.userid)
+                //         return {...users, followed: false};
+                //     return users
+                // })
             };
 
         case setUsersformServer:
@@ -136,7 +141,6 @@ export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
 export const followThunkCreator = (id) => {
     return  (dispatch) => {
         dispatch(toogleDiableBotton(true, id));
-
 
         usersAPI.follow(id)
             .then(response => {
