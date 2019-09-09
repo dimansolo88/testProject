@@ -1,9 +1,12 @@
 import {profileAPI} from "../API/API";
+import {reset} from 'redux-form';
+
 let add_post = "ADD-POST";
 // let update_post = "UPDATE-POST";
 // import users from "../assets/images/photoUsersPost.jpg"
 let setProfileUser = "SET-PROFILE-USER";
-let setUserStatus = "SET-PROFILE-STATUS";;
+let setUserStatus = "SET-PROFILE-STATUS";
+;
 let showPrealoder = "SHOW-PREALODER";
 let DELETE_POST = "DELETE_POST";
 
@@ -48,8 +51,8 @@ const profileReducer = (state = initialstate, action) => {
 
         case DELETE_POST:
             return {
-            ...state,postdata: state.postdata.filter(p => p.id !== action.postId )
-        }
+                ...state, postdata: state.postdata.filter(p => p.id !== action.postId)
+            }
 
 
         // return stateCopy;
@@ -108,12 +111,18 @@ const profileReducer = (state = initialstate, action) => {
 // return state;
 
 
+export const addPOstThunkCreator = (post) => (dispatch) => {
+    dispatch(addpostActionCreator(post));
+    dispatch(reset('addNewPOst'));  // requires form name
+}
+
 export const addpostActionCreator = (post) => ({
     type: add_post, post
+
 });
 
 export const deleteActionCreator = (postId) => ({
-    type:DELETE_POST, postId
+    type: DELETE_POST, postId
 })
 
 
@@ -126,7 +135,7 @@ export const setProfileU = (profile) => ({type: setProfileUser, profile});
 
 export const setProfileStatus = (status) => ({type: setUserStatus, status});
 
-export const showPrealoderAC = (isFetching) => ({type:showPrealoder, isFetching });
+export const showPrealoderAC = (isFetching) => ({type: showPrealoder, isFetching});
 
 
 export const profileInfoThunkCreator = (userid) => {

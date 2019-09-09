@@ -2,7 +2,7 @@ import React from 'react';
 import style from './textarea.module.css'
 
 
-export const Texarea = ({input, meta, ...props}) => {
+export const Texarea = ({input, meta, error,touched, ...props}) => {
 
 
     return (

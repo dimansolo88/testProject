@@ -1,4 +1,5 @@
 import {dialogsAPI} from "../API/API";
+import {reset} from 'redux-form';
 
 let send_message = "SEND-MESSAGE";
 let update_message = "UPDATE-MESSAGE";
@@ -160,7 +161,7 @@ export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
     let message = await dialogsAPI.sendMessage(userId, body);
     if (message.resultCode == 0) {
         dispatch(sendMessageSuccessActionCreator(message.data.message))
-
+        dispatch(reset('dialog-message-form'));  // requires form name
         dispatch(putUpActionCreator(userId))
 
 
@@ -172,7 +173,6 @@ export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
 export const newCountThunkCreator = () => async (dispatch) => {
     let count = await dialogsAPI.getNewMessagesCount();
     dispatch(getMessagesCountActionCreator(count))
-
 
 }
 

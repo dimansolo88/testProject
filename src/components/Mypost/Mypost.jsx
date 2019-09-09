@@ -6,13 +6,15 @@ import NewPost from "./NewPost/NewPost";
 import {AddPostReduxForm} from "./AddpostForm";
 
 
+
 const Mypost = React.memo ((props) => {
    
 
 
     const adddNewPost = (data) => {
         console.log(data);
-        props.add(data.addNewPost)
+        props.add(data.addNewPost);
+
 
     };
 
@@ -41,7 +43,7 @@ const Mypost = React.memo ((props) => {
 
 
 
-            <AddPostReduxForm onSubmit={adddNewPost} />
+            <AddPostReduxForm onSubmit={adddNewPost}  />
 
             {postselements}
 

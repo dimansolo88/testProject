@@ -1,6 +1,6 @@
 // import React from 'react';
 
-import {addpostActionCreator} from "../../redux/profile-reducer";
+import {addpostActionCreator, addPOstThunkCreator} from "../../redux/profile-reducer";
 import Mypost from "./Mypost";
 import {connect} from "react-redux";
 
@@ -53,22 +53,22 @@ const mapStateToProps = (state) => {
 
 };
 
-const mapDispatchToProps = (dispatch) => {
-
-    return {
-        add: (post) => {
-            dispatch(addpostActionCreator(post));
-        },
+// const mapDispatchToProps = (dispatch) => {
+//
+//     return {
+//         add: (post) => {
+//             dispatch(addpostActionCreator(post));
+//         },
 
     //     change: (text) => {
     //         dispatch(updatepostActionCreator(text))
     // }
 
-    }
+//     }
+// //
+// // };
 
-};
-
-const superMypostContanier = connect(mapStateToProps, mapDispatchToProps)(Mypost);
+const superMypostContanier = connect(mapStateToProps, {add:addPOstThunkCreator})(Mypost);
 
 
 

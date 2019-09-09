@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm} from "redux-form";
+import {Field,  reduxForm} from "redux-form";
 import {Texarea} from "../Common/ValidationForm/ValidationTexarea";
 import {maxLengthCreator, minLengthCreator} from "../../Utilites/Validation";
 
@@ -10,6 +10,7 @@ const minlength = minLengthCreator(1);
 
 
 const AddpostForm = (props) => {
+    debugger
 
     return (
 
@@ -25,6 +26,7 @@ const AddpostForm = (props) => {
             <div>
                 <button> add post</button>
             </div>
+
 
         </form>
 
