@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
 import React from "react";
-// import * as axios from "axios";
 import Users from "./Users";
 import {
     followThunkCreator, setUserThunkCreator, unfollowThunkCreator
@@ -10,29 +9,16 @@ import {
 class UsersContanier extends React.Component {
 
     componentDidMount() {
-        // this.props.showPrealoderOnUsers(true);
-        // usersAPI.getUsers(this.props.currentPage,this.props.quantityUsersOnPage)
-        //     .then(data => {
-        //         this.props.showPrealoderOnUsers(false);
-        //         this.props.setUsers(data.items);
-        //         this.props.totalusersCount(data.totalCount)
-        //     })
 
-        this.props.setUserThunkCreator(this.props.currentPage, this.props.quantityUsersOnPage);
+        const {currentPage,quantityUsersOnPage} = this.props;
+        this.props.setUserThunkCreator(currentPage, quantityUsersOnPage);
 
     }
 
 
     onChanhePage = (pages) => {
-        // this.props.setPages(pages);
-        // this.props.showPrealoderOnUsers(true);
-        // usersAPI.selectUsersCurrentPage(pages,this.props.quantityUsersOnPage)
-        //     .then(data => {
-        //         this.props.showPrealoderOnUsers(false);
-        //         this.props.setUsers(data.items)
-        //     })
-
-        this.props.setUserThunkCreator(pages, this.props.quantityUsersOnPage);
+        const {quantityUsersOnPage} = this.props;
+        this.props.setUserThunkCreator(pages, quantityUsersOnPage);
 
     };
 
@@ -75,38 +61,6 @@ const mapStateToProps = (state) => {
     }
 };
 
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         follU: (id) => {
-//             dispatch(followActionCreator(id))
-//         },
-//         unfollU: (id) => {
-//             dispatch(unFollowActionCreator(id))
-//         },
-//
-//         setUsers: (user) => {
-//             dispatch(setUsersActionCreator(user))
-//         },
-//
-//         setPages: (pages) => {
-//             dispatch(setCurrentpagesAC(pages))
-//         },
-//
-//         totalusersCount: (count) => {
-//             dispatch(setTotalUsersFromServerAC(count))
-//         },
-//
-//         showPrealoderOnUsers: (isFetching) => {
-//             dispatch(showPrealoderAC(isFetching))
-//         }
-//
-//
-//     }
-// };
-
-
-// const UsersContanier = connect(mapStateToProps, mapDispatchToProps)(Users);
 
 export default connect(mapStateToProps, {setUserThunkCreator, followThunkCreator,
     unfollowThunkCreator})(UsersContanier);

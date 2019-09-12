@@ -30,9 +30,12 @@ const userReducer = (state = initialeestate, action) => {
 
         case follow:
             return {
-                ...state,users: updateObjInArray(state.users,action.userid,"id",
-                    {followed: true})
-                // users: state.users.map(u => {
+                ...state,users:
+                    updateObjInArray(state.users,action.userid,"id",
+                        {followed: true})
+
+
+                //     state.users.map(u => {
                 //     if (u.id === action.userid)
                 //         return {...u, followed: true};
                 //     return u
@@ -170,6 +173,9 @@ export const unfollowThunkCreator = (id) => {
 }
 
 export default userReducer;
+
+
+
 
 
 // let follow = "FOLLOW";

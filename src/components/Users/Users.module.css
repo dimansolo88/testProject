@@ -15,17 +15,22 @@
 
 }
 
-.numberLInk{
-    font-weight: bolder;
-    font-size: large;
-    cursor: pointer;
-
-
+.paginator{
+    display: flex;
+    justify-content: center;
 }
 
-.pageHover:hover{
-    cursor: pointer;
-}
+/*.numberLInk{*/
+/*    font-weight: bolder;*/
+/*    font-size: large;*/
+/*    cursor: pointer;*/
+
+
+/*}*/
+
+/*.pageHover:hover{*/
+/*    cursor: pointer;*/
+/*}*/
 
 
 

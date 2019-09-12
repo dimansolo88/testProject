@@ -49,8 +49,6 @@ const mapStateToProps = (state) => {
         stated: state.profilepage
     }
 
-
-
 };
 
 // const mapDispatchToProps = (dispatch) => {
@@ -69,11 +67,6 @@ const mapStateToProps = (state) => {
 // // };
 
 const superMypostContanier = connect(mapStateToProps, {add:addPOstThunkCreator})(Mypost);
-
-
-
-
-
 
 
 export default superMypostContanier;

@@ -157,15 +157,19 @@ export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
 
 
 export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
+    try{
+        let message = await dialogsAPI.sendMessage(userId, body);
+        if (message.resultCode == 0) {
+            dispatch(sendMessageSuccessActionCreator(message.data.message))
+            dispatch(reset('dialog-message-form'));  // requires form name
+            dispatch(putUpActionCreator(userId))
 
-    let message = await dialogsAPI.sendMessage(userId, body);
-    if (message.resultCode == 0) {
-        dispatch(sendMessageSuccessActionCreator(message.data.message))
-        dispatch(reset('dialog-message-form'));  // requires form name
-        dispatch(putUpActionCreator(userId))
-
-
+        }
+    } catch (e) {
+        console.error("some error")
     }
+
+
 
 };
 

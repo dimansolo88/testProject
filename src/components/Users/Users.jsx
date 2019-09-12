@@ -4,17 +4,10 @@ import style from "./Users.module.css"
 import photos from "../../assets/images/userPhoto.jpg"
 import Prealoder from "../Common/Ptrealoder";
 import {NavLink} from "react-router-dom";
-// import * as axios from 'axios';
+import Paginator from "../Common/Pagination/Paginator";
 
 
 const Users = (props) => {
-
-    let quantityUsersPages = Math.ceil(props.totalUsers / props.quantityUsersOnPage);
-
-    let quantityPages = [];
-    for (let i = 1; i <= quantityUsersPages; i++) {
-        quantityPages.push(i)
-    }
 
 
     return <div className={style.usersWrapper}>
@@ -24,22 +17,10 @@ const Users = (props) => {
         </div>
 
 
-        <div className={style.pageHover}>
+        <div className={style.paginator}>
 
+            <Paginator {...props} />
 
-            {quantityPages.map(pages => {
-                return <span key={pages} onClick={() => {
-                    props.onChanhePage(pages)
-                }}
-                             className={props.currentPage ===
-                             pages && style.numberLInk}> {pages} </span>
-            })}
-
-
-            {/*<span> 2 </span>*/}
-            {/*<span> 3 </span>*/}
-            {/*<span className={style.numberLInk} > 4 </span>*/}
-            {/*<span> 5 </span>*/}
 
         </div>
 
@@ -128,6 +109,8 @@ const Users = (props) => {
 
 
         </div>)}
+
+
 
     </div>
 
