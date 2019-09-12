@@ -39,7 +39,7 @@ const Paginator = ({totalUsers,quantityUsersOnPage, onChanhePage, currentPage, p
 
             {portionCount > portionNUmber &&  <button onClick={() => {setPortionNumber(portionNUmber +1)} }>
                 next
-            </button>}
+            </button>} 
 
 
 

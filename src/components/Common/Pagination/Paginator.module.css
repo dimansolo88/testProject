@@ -2,6 +2,8 @@
     font-weight: bolder;
     font-size: large;
     cursor: pointer;
+    background-color: white;
+
 
 
 }
@@ -9,3 +11,19 @@
 .pageHover:hover{
     cursor: pointer;
 }
+
+.pageHover span {
+    margin-left: 5px;
+    padding: 3px;
+    border: 1px solid ;
+}
+
+.pageHover button {
+    margin: 0 10px 0 10px;
+    background-color: aqua;
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
+}
+
