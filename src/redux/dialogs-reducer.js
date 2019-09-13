@@ -166,7 +166,7 @@ export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
 
         }
     } catch (e) {
-        console.error("some error")
+        console.error(e)
     }
 
 

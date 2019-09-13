@@ -21,14 +21,6 @@ export const usersAPI = {
     },
 
 
-    // selectUsersCurrentPage(pages, quantityUsersOnPage) {
-    //
-    //     return instance.get(`users?page=${pages}
-    //     &count=${quantityUsersOnPage}`)
-    //         .then(response => response.data)
-    //
-    // },
-
     follow(id) {
         return instance.post(`follow/${id}`)
 
@@ -36,9 +28,14 @@ export const usersAPI = {
     },
 
 
-    unfoloow(id) {
-        return instance.delete(`follow/${id}`)
+    async unfoloow(id) {
 
+        try {
+            let res = await instance.delete(`follow/${id}`)
+            return res.data.resultCode
+        } catch (e) {
+           console.log(e)
+        }
     },
 
 
@@ -120,13 +117,13 @@ export const dialogsAPI = {
             .then(response => response.data.items)
     },
 
-    sendMessage (userId, body) {
+    sendMessage(userId, body) {
         return instance.post(`dialogs/${userId}/messages`, {body})
             .then(response => response.data)
-            
+
     },
 
-    getNewMessagesCount () {
+    getNewMessagesCount() {
         return instance.get(`dialogs/messages/new/count`)
             .then(res => res.data)
     }

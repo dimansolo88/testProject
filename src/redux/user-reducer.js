@@ -10,7 +10,6 @@ let showPrealoder = "SHOW-PREALODER";
 let followingBotton = "FOLLOWING-BOTTON";
 
 
-
 let initialeestate = {
     users: [],
     totalUsers: 0,
@@ -18,8 +17,6 @@ let initialeestate = {
     currentPage: 1,
     isFetching: false,
     followingProgress: [],
-
-
 
 
 };
@@ -30,8 +27,8 @@ const userReducer = (state = initialeestate, action) => {
 
         case follow:
             return {
-                ...state,users:
-                    updateObjInArray(state.users,action.userid,"id",
+                ...state, users:
+                    updateObjInArray(state.users, action.userid, "id",
                         {followed: true})
 
 
@@ -44,7 +41,7 @@ const userReducer = (state = initialeestate, action) => {
 
         case unfollow:
             return {
-                ...state, users:updateObjInArray(state.users,action.userid,"id",
+                ...state, users: updateObjInArray(state.users, action.userid, "id",
                     {followed: false})
                 // users: state.users.map(users => {
                 //     if (users.id === action.userid)
@@ -79,12 +76,10 @@ const userReducer = (state = initialeestate, action) => {
 
         case followingBotton:
             return {
-                ...state,followingProgress: action.progressDiable
-                    ? [...state.followingProgress,action.idFromUI]
+                ...state, followingProgress: action.progressDiable
+                    ? [...state.followingProgress, action.idFromUI]
                     : [state.followingProgress.filter(id => id !== action.idFromUI)]
             };
-
-
 
 
         default:
@@ -103,7 +98,7 @@ export const unFollowActionCreator = (userid) => ({
 });
 
 
-export const  setUsersActionCreator= (user) => ({
+export const setUsersActionCreator = (user) => ({
     type: setUsersformServer, user
 });
 
@@ -115,23 +110,20 @@ export const setTotalUsersFromServerAC = (totalUsers) => ({
     type: setTotalUsersfromServer, totalUsers
 });
 
-export const showPrealoderAC = (isFetching) => ({type:showPrealoder, isFetching });
-export const toogleDiableBotton = (progressDiable, idFromUI) => ({type: followingBotton, progressDiable, idFromUI });
-
-
-
+export const showPrealoderAC = (isFetching) => ({type: showPrealoder, isFetching});
+export const toogleDiableBotton = (progressDiable, idFromUI) => ({type: followingBotton, progressDiable, idFromUI});
 
 
 export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
-    return  (dispatch) => {
+    return (dispatch) => {
 
         dispatch(showPrealoderAC(true));
-        usersAPI.getUsers(currentPage,quantityUsersOnPage)
+        usersAPI.getUsers(currentPage, quantityUsersOnPage)
             .then(data => {
                 dispatch(showPrealoderAC(false));
                 dispatch(setUsersActionCreator(data.items));
                 dispatch(setTotalUsersFromServerAC(data.totalCount));
-                dispatch(setCurrentpagesAC(currentPage,quantityUsersOnPage))
+                dispatch(setCurrentpagesAC(currentPage, quantityUsersOnPage))
             })
 
     }
@@ -140,9 +132,8 @@ export const setUserThunkCreator = (currentPage, quantityUsersOnPage) => {
 };
 
 
-
 export const followThunkCreator = (id) => {
-    return  (dispatch) => {
+    return (dispatch) => {
         dispatch(toogleDiableBotton(true, id));
 
         usersAPI.follow(id)
@@ -157,25 +148,34 @@ export const followThunkCreator = (id) => {
 
 
 export const unfollowThunkCreator = (id) => {
-    return (dispatch) => {
-        dispatch(toogleDiableBotton(true, id));
-        usersAPI.unfoloow(id)
-            .then(response => {
-                dispatch(toogleDiableBotton(false, id));
-                if (response.data.resultCode === 0) {
-                   dispatch(unFollowActionCreator(id))
-                }
-            })
+    try {
+        return async (dispatch) => {
+            dispatch(toogleDiableBotton(true, id));
+            let res = await usersAPI.unfoloow(id);
+            dispatch(toogleDiableBotton(false, id));
+            if (res === 0) {
+                dispatch(unFollowActionCreator(id))
+            }
+        }
+    } catch (e) {
+        console.warn(e)
     }
+};
 
 
+// return async (dispatch) => {
+//     dispatch(toogleDiableBotton(true, id));
+//      await usersAPI.unfoloow(id)
+//         .then(response => {
+//             dispatch(toogleDiableBotton(false, id));
+//             if (response.data.resultCode === 0) {
+//                dispatch(unFollowActionCreator(id))
+//             }
+//         })
+// }
 
-}
 
 export default userReducer;
-
-
-
 
 
 // let follow = "FOLLOW";

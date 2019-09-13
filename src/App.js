@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import Redirect, {Route, withRouter} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import DialogsContanier from "./components/Dialogs/DialogsContanier";
