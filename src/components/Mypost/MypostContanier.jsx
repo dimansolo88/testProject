@@ -1,47 +1,17 @@
 // import React from 'react';
 
-import {addpostActionCreator, addPOstThunkCreator} from "../../redux/profile-reducer";
+import {addPOstThunkCreator} from "../../redux/profile-reducer";
 import Mypost from "./Mypost";
 import {connect} from "react-redux";
+import React from "react";
 
 
 
-
-
-
-
-// const MypostContanier = (props) => {
-//
-//     // let postselements =
-//     //     props.state.postdata.map(post => <Post message={post.message} like={post.like} />)
-//
-//
-//
-//
-//     let addpost = () => {
-//
-//
-//         props.dispatch(addpostActionCreator());
-//
-//
-//     };
-//
-//
-//
-//
-//     let postchange = (text) => {
-//
-//
-//
-//         props.dispatch(updatepostActionCreator(text))
-//
-//     };
-//
-//
-//
-//
-//     return (<Mypost add={addpost}  change={postchange}  stated={props.state} dispatch={props.dispatch}  />  )
-// };
+const MypostContanier = (props) => {
+    return (
+        <Mypost {...props}/>
+    )
+};
 
 
 const mapStateToProps = (state) => {
@@ -51,23 +21,9 @@ const mapStateToProps = (state) => {
 
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//
-//     return {
-//         add: (post) => {
-//             dispatch(addpostActionCreator(post));
-//         },
 
-    //     change: (text) => {
-    //         dispatch(updatepostActionCreator(text))
-    // }
-
-//     }
-// //
-// // };
-
-const superMypostContanier = connect(mapStateToProps, {add:addPOstThunkCreator})(Mypost);
+export default connect(mapStateToProps, {addNewPost:addPOstThunkCreator})(MypostContanier);
 
 
-export default superMypostContanier;
+
 

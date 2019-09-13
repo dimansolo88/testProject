@@ -10,7 +10,7 @@ const minlength = minLengthCreator(1);
 
 
 const AddpostForm = (props) => {
-    debugger
+
 
     return (
 

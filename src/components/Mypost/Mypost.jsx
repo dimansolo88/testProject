@@ -13,7 +13,7 @@ const Mypost = React.memo ((props) => {
 
     const adddNewPost = (data) => {
         console.log(data);
-        props.add(data.addNewPost);
+        props.addNewPost(data.addNewPost);
 
 
     };
@@ -34,7 +34,11 @@ const Mypost = React.memo ((props) => {
     return (
 
 
+
+
         <div className={m.post}>
+
+
 
             <NewPost/>
 
