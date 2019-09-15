@@ -7,7 +7,6 @@ import {
     updateProfileStatusThunkCreator
 } from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
-// import {WithAthREdirect} from "../HOC/RedirectComponent";
 import {compose} from "redux";
 import {WithAthREdirect} from "../HOC/RedirectComponent";
 import {getAuthMe, getUserProfile} from "../../redux/Selectors/ProfileSelector";

@@ -5,19 +5,23 @@ import Navbar from "./components/Navbar/Navbar";
 import {Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import DialogsContanier from "./components/Dialogs/DialogsContanier";
 import UsersContanier from "./components/Users/UsersContanier";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initiakisationThunkCreator} from "./redux/App-reducer";
 import Prealoder from "./components/Common/Ptrealoder";
-import SettingsContainer from "./components/Settings/SettingsContainer";
+// import SettingsContainer from "./components/Settings/SettingsContainer";
 import {getNewMessagesCount} from "./redux/Selectors/AppSelector";
 import {newCountThunkCreator} from "./redux/dialogs-reducer";
-// import {SiteTemplate} from "./components/HOC/RedirectComponent";
+import {WithSuspense} from "./components/HOC/WithSuspense";
+// this components to be lazy loading
+const DialogsContanier = React.lazy(() => import('./components/Dialogs/DialogsContanier'));
+const SettingsContainer = React.lazy(() => import( "./components/Settings/SettingsContainer"));
+const Login = React.lazy(() => import("./components/Login/Login"));
+
+
 
 
 class App extends Component {
@@ -43,8 +47,6 @@ class App extends Component {
     // }
 
 
-
-
     render() {
         if (!this.props.itIsInitialisation) {
             return <Prealoder/>
@@ -55,25 +57,25 @@ class App extends Component {
 
 
             <div className="app-wrapper">
-                {this.props.messagesCount > 0 && <div className="notification"> new message: {this.props.messagesCount}  </div>}
+                {this.props.messagesCount > 0 &&
+                <div className="notification"> new message: {this.props.messagesCount}  </div>}
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
 
-                    <Route path="/dialogs/:userId?" render={() => <DialogsContanier  />}/>
+                    <Route path="/dialogs/:userId?" render={WithSuspense(DialogsContanier)}/>
                     <Route path="/profile/:userid?" render={() => <ProfileContainer/>}/>
-                    <Route path="/news" component={News}/>
-                    <Route path="/music" component={Music}/>
-                    <Route path="/settings" component={SettingsContainer}/>
+                    <Route path="/news" render={() => <News/>}/>
+                    <Route path="/music" render={() =>  <Music/>}/>
+                    <Route path="/settings" render={WithSuspense (SettingsContainer)}/>
                     <Route path="/users" render={() => <UsersContanier/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
+                    <Route path="/login" render={WithSuspense(Login)}/>
 
 
                 </div>
 
 
-{/*<SiteTemplate header={() => { return  <div>security</div>}}  mainContent={() => <input />} />*/}
-
+                {/*<SiteTemplate header={() => { return  <div>security</div>}}  mainContent={() => <input />} />*/}
 
 
             </div>
@@ -92,8 +94,10 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default  compose (
+export default compose(
     withRouter,
-    connect (mapStateToProps, {initialisation: initiakisationThunkCreator,
-    newMessagesCount: newCountThunkCreator} )) (App);
+    connect(mapStateToProps, {
+        initialisation: initiakisationThunkCreator,
+        newMessagesCount: newCountThunkCreator
+    }))(App);
 

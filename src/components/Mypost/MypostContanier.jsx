@@ -1,12 +1,12 @@
 import {addPOstThunkCreator} from "../../redux/profile-reducer";
-import Mypost from "./Mypost";
 import {connect} from "react-redux";
 import React from "react";
+import MyPost from "./Mypost";
 
 
 const MypostContanier =  (props) => {
     return (
-        <Mypost {...props}/>
+        <MyPost {...props}/>
     )
 }
 

@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import style from './Paginator.module.css';
 
 
-const Paginator = ({totalUsers,quantityUsersOnPage, onChanhePage, currentPage, portionSize = 10}) => {
+const Paginator =  ({totalUsers,quantityUsersOnPage, onChanhePage, currentPage, portionSize = 10}) => {
+
+
 
     let quantityUsersPages = Math.ceil(totalUsers / quantityUsersOnPage);
-
     let quantityPages = [];
     for (let i = 1; i <= quantityUsersPages; i++) {
         quantityPages.push(i)
@@ -54,7 +55,7 @@ const Paginator = ({totalUsers,quantityUsersOnPage, onChanhePage, currentPage, p
 
         </div>
     )
-}
+};
 
 
 export default Paginator

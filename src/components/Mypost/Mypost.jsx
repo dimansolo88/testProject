@@ -6,7 +6,7 @@ import {AddPostReduxForm} from "./AddpostForm";
 
 
 
-const Mypost = React.memo( (props) => {
+const MyPost = React.memo( (props) => {
 
     const adddNewPost = (data) => {
         console.log(data);
@@ -27,6 +27,8 @@ const Mypost = React.memo( (props) => {
 
     return (
 
+
+
         <div className={m.post}>
 
             <NewPost/>
@@ -40,5 +42,5 @@ const Mypost = React.memo( (props) => {
     )
 });
 
-export default Mypost;
+export default MyPost;
 
