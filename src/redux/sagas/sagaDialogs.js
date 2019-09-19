@@ -1,13 +1,19 @@
-import { put, takeEvery } from 'redux-saga/effects'
+import { put, takeEvery, call } from 'redux-saga/effects'
 import {dialogsAPI} from "../../API/API";
 import {GET_DIALOG_SAGA, getDialogsSuccessActionCreator} from "../dialogs-reducer";
 
 
 export function* getDialogsSaga() {
 
+    try {
+        let res = yield call(dialogsAPI.getDialogs);
+        yield put(getDialogsSuccessActionCreator(res))
+    }
+    catch (e) {
+        console.log(e)
+    }
 
-    let res = yield dialogsAPI.getDialogs();
-    yield put(getDialogsSuccessActionCreator(res))
+
 
 }
 
