@@ -6,7 +6,12 @@ import authReducer from "./Auth-reducer";
 import thunk from "redux-thunk"
 import { reducer as formReducer } from 'redux-form'
 import appReducer from "./App-reducer";
+import createSagaMiddleware from 'redux-saga';
+import {dialogsSaga} from "./sagas/sagaLogin";
 
+
+
+const sagaMiddleware = createSagaMiddleware();
 
 let reducers = combineReducers({
 
@@ -21,7 +26,10 @@ let reducers = combineReducers({
 });
 
 
-let store = createStore(reducers, applyMiddleware(thunk));
+let store = createStore(reducers, applyMiddleware(thunk, sagaMiddleware));
+
+sagaMiddleware.run(dialogsSaga);
+
 
 
 window.store = store;

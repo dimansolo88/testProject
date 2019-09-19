@@ -1,7 +1,7 @@
 import {
-    getDialogsThunkCreator,
+    getDialog,
     getMessagesThunkCreator, selectDialogActionCreator,
-     sendMessageThunkCreator,
+    sendMessageThunkCreator,
     startDialogThunkCreator
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
@@ -96,7 +96,7 @@ const mapStateToProps = (state) => {
 
 export default compose (
 connect (mapStateToProps, {
-    getDialogs:getDialogsThunkCreator,
+    getDialogs:getDialog,
     startDialog:startDialogThunkCreator,getMessages:getMessagesThunkCreator,
     setDialogId:selectDialogActionCreator, sendMessage:sendMessageThunkCreator })
     , withRouter , WithAthREdirect)(DialogsContanier);

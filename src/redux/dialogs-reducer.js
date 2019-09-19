@@ -1,8 +1,9 @@
 import {dialogsAPI} from "../API/API";
 import {reset} from 'redux-form';
 
-let send_message = "SEND-MESSAGE";
-let update_message = "UPDATE-MESSAGE";
+export let GET_DIALOG_SAGA = "DIALOGS/GET_DIALOGS"
+
+
 let get_dialogs_success = "SN/DIALOGS/GET-DIALOGS-SUCCESS";
 let PUT_UP_DIALOG = "PUT_UP_DIALOG";
 let GET_MESSAGES = "GET_MESSAGES";
@@ -64,24 +65,6 @@ const dialoReducer = (state = initialstate, action) => {
 
 
 
-
-        // case update_message:
-        //
-        //     return {
-        //         ...state,
-        //         textmessage: action.textmessage
-        //     };
-        //
-        //
-        // case send_message:
-        //     let textmessage = action.message;
-        //     return {
-        //         ...state,
-        //         // textmessage: "",
-        //         messagesdata: [...state.messagesdata, {id: 6, message: textmessage}]
-        //     };
-
-
         default:
             return state;
     }
@@ -92,6 +75,10 @@ const dialoReducer = (state = initialstate, action) => {
 // export const sendMessageCreator = (message) => ({
 //     type: send_message, message
 // });
+
+export const getDialog = () => ({
+    type:GET_DIALOG_SAGA
+})
 
 
 export const getDialogsSuccessActionCreator = (dialogs) => ({
@@ -125,14 +112,14 @@ export const getMessagesCountActionCreator = (count) => ({
 
 
 
-export const getDialogsThunkCreator = () => (dispatch) => {
-    dialogsAPI.getDialogs().then(dialogs => {
-        dispatch(getDialogsSuccessActionCreator(dialogs))
-
-    })
-
-
-};
+// export const getDialogsThunkCreator = () => (dispatch) => {
+//     dialogsAPI.getDialogs().then(dialogs => {
+//         dispatch(getDialogsSuccessActionCreator(dialogs))
+//
+//     })
+//
+//
+// };
 
 export const getMessagesThunkCreator = (userId) => (dispatch) => {
 
@@ -148,7 +135,8 @@ export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
         if (dialogs) {
             dispatch(putUpActionCreator(userId))
         } else {
-            dispatch(getDialogsThunkCreator())
+            // dispatch(getDialogsThunkCreator())
+            getDialog()
         }
 };
 
