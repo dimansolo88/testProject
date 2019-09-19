@@ -12,7 +12,6 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {initiakisationThunkCreator} from "./redux/App-reducer";
 import Prealoder from "./components/Common/Ptrealoder";
-// import SettingsContainer from "./components/Settings/SettingsContainer";
 import {getNewMessagesCount} from "./redux/Selectors/AppSelector";
 import {newCountThunkCreator} from "./redux/dialogs-reducer";
 import {WithSuspense} from "./components/HOC/WithSuspense";

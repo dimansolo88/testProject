@@ -3,15 +3,15 @@ import Prealoder from "../Common/Ptrealoder";
 
 
 export const WithSuspense = (Component) => {
-      const SuspensComponent =   (props) => {
+    const SuspensComponent = (props) => {
 
         return <React.Suspense fallback={<Prealoder/>}>
             <Component {...props}/>
-            </React.Suspense>
+        </React.Suspense>
 
     };
 
-      return SuspensComponent
+    return SuspensComponent
 
 };
 

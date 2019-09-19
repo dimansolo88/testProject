@@ -9,8 +9,8 @@ import {Redirect} from "react-router-dom";
 
 const Login = (props) => {
 
-    const onSubmit = (data) => {
-        props.loginThunkCreator(data.email, data.password,data.rememberMe);
+    const onSubmit = ({email, password,rememberMe}) => {
+        props.loginThunkCreator(email, password,rememberMe);
 
 
 
@@ -19,8 +19,6 @@ const Login = (props) => {
     if (props.isAuth) {
         return <Redirect to={'/profile'}/>
     }
-
-
 
 
     return <div className={style.login} >

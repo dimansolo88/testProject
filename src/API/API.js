@@ -27,14 +27,13 @@ export const usersAPI = {
 
     },
 
-
     async unfoloow(id) {
 
         try {
             let res = await instance.delete(`follow/${id}`)
             return res.data.resultCode
         } catch (e) {
-           console.log(e)
+            console.log(e)
         }
     },
 
@@ -80,8 +79,12 @@ export const profileAPI = {
 };
 
 export const authAPI = {
-    authMe() {
-        return instance.get(`auth/me`)
+    async authMe() {
+        try {
+            return await instance.get(`auth/me`)
+        } catch (e) {
+            console.log(e)
+        }
 
     },
 };
