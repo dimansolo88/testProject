@@ -66,17 +66,17 @@ export const loginThunkCreator = (email,password,rememberMe) => (dispatch) => {
 };
 
 
-export const logOutThunkCreator = () => (dispatch) => {
-    profileAPI.logOut()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                    dispatch(authMe(null, null, null, false))
-
-            }
-        })
-
-
-};
+// export const logOutThunkCreator = () => (dispatch) => {
+//     profileAPI.logOut()
+//         .then(response => {
+//             if (response.data.resultCode === 0) {
+//                     dispatch(authMe(null, null, null, false))
+//
+//             }
+//         })
+//
+//
+// };
 
 
 

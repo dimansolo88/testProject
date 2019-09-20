@@ -8,6 +8,7 @@ export function* getDialogsSaga() {
     try {
         let res = yield call(dialogsAPI.getDialogs);
         yield put(getDialogsSuccessActionCreator(res))
+
     }
     catch (e) {
         console.log(e)
@@ -20,7 +21,7 @@ export function* getDialogsSaga() {
 
 //sagaWatcher
 export function* dialogsSaga() {
-    yield takeEvery(GET_DIALOG_SAGA, getDialogsSaga)
+    yield takeEvery (GET_DIALOG_SAGA, getDialogsSaga)
 }
 
 

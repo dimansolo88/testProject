@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import { logOutThunkCreator} from "../../redux/Auth-reducer";
 import {getAuthMe} from "../../redux/Selectors/ProfileSelector";
+import {logOut} from "../../redux/sagas/sagaAuth";
+// import {logOutThunkCreator} from "../../redux/Auth-reducer";
 
 class HeaderContainer extends React.Component {
 
@@ -29,5 +30,5 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, {logOut:logOutThunkCreator})(HeaderContainer);
+export default connect(mapStateToProps, {logOut:logOut})(HeaderContainer);
 
