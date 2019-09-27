@@ -14,35 +14,32 @@ import {getAuthMe, getUserProfile} from "../../redux/Selectors/ProfileSelector";
 
 class ProfileContainer extends React.Component {
 
-    componentDidMount() {
-
-
+    refreshProfile = () => {
         let userid = this.props.match.params.userid;
         if (!userid) {
             userid = this.props.autorizedUserId;
             if (!userid) {
                 this.props.history.push('login')
-
             }
-
         }
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userid)
-        // profileAPI.ProfileInfo(userid)
-        //     .then(response => {
-        //         this.props.setProfileU(response.data)
-        //
-        //
-        //     })
-
         this.props.profileInfo(userid);
         this.props.getStatus(userid);
+    };
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.match.params.userid !== this.props.match.params.userid) {
+        }
+        this.refreshProfile()
     }
 
 
     render() {
         return (
-            <Profile  {...this.props}  />
+            <Profile  {...this.props} />
 
         )
 
@@ -51,10 +48,6 @@ class ProfileContainer extends React.Component {
 
 }
 
-//
-// let redirect = WithAthREdirect(ProfileContainer);
-
-
 let mapStateToProps = (state) => {
     return {
         // setProfileUser: state.profilepage.setProfileUs,
@@ -62,7 +55,7 @@ let mapStateToProps = (state) => {
         // isAuth: state.auth.isAuth,
         isAuth: getAuthMe(state),
         status: state.profilepage.status,
-        isFetching:state.profilepage.isFetching,
+        isFetching: state.profilepage.isFetching,
         autorizedUserId: state.auth.userId
 
 
@@ -71,16 +64,15 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {profileInfo: profileInfoThunkCreator,
-        getStatus: getProfileStatusThunkCreator,updateStatus: updateProfileStatusThunkCreator}),
+    connect(mapStateToProps, {
+        profileInfo: profileInfoThunkCreator,
+        getStatus: getProfileStatusThunkCreator, updateStatus: updateProfileStatusThunkCreator
+    }),
     withRouter,
     WithAthREdirect
 )(ProfileContainer);
 
 
-// let withURL = withRouter(redirect);
-//
-// export default connect(mapStateToProps, {profileInfo: profileInfoThunkCreator})    (withURL);
 
 
 

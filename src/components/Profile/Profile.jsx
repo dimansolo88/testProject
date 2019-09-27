@@ -6,7 +6,7 @@ import MypostContanier from "../Mypost/MypostContanier";
 
 const Profile =  React.memo((props) => {
 
-
+debugger
 
 
     return (
