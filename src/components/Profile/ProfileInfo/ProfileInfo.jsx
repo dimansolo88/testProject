@@ -24,9 +24,9 @@ const ProfileInfo = (props) => {
 
                 <img src={props.setProfileUser.photos.large != null ? props.setProfileUser.photos.large
                     : photos} alt="ProfilePhoto"/>
-                {!props.match.params.userid && <input type={"file"} />}
+                {/*{!props.match.params.userid && <input type={"file"} />}*/}
 
-                
+
 
 
                     <ProfileStatusWithHook {...props}  />
