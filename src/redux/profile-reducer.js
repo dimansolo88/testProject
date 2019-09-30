@@ -6,29 +6,24 @@ let add_post = "ADD-POST";
 // import users from "../assets/images/photoUsersPost.jpg"
 let setProfileUser = "SET-PROFILE-USER";
 let setUserStatus = "SET-PROFILE-STATUS";
-;
 let showPrealoder = "SHOW-PREALODER";
 let DELETE_POST = "DELETE_POST";
 
 
-let initialstate = {
+
+let initialState = {
 
     postdata: [],
-
-
     textmypost: "jjj",
-
     setProfileUs: null,
-
     status: "",
-
     isFetching: false,
 
 
 };
 
 
-const profileReducer = (state = initialstate, action) => {
+const profileReducer = (state = initialState, action) => {
 
     // let stateCopy;
 
@@ -52,17 +47,7 @@ const profileReducer = (state = initialstate, action) => {
         case DELETE_POST:
             return {
                 ...state, postdata: state.postdata.filter(p => p.id !== action.postId)
-            }
-
-
-        // return stateCopy;
-
-        // case update_post:
-        //     return {
-        //         ...state,
-        //         textmypost: action.postext
-        //     };
-        // return stateCopy;
+            };
 
         case setProfileUser:
             return {
@@ -79,6 +64,8 @@ const profileReducer = (state = initialstate, action) => {
             return {
                 ...state, isFetching: action.isFetching
             };
+
+
 
         default:
             return state;
@@ -132,10 +119,9 @@ export const deleteActionCreator = (postId) => ({
 // });
 
 export const setProfileU = (profile) => ({type: setProfileUser, profile});
-
 export const setProfileStatus = (status) => ({type: setUserStatus, status});
-
 export const showPrealoderAC = (isFetching) => ({type: showPrealoder, isFetching});
+
 
 
 export const profileInfoThunkCreator = (userid) => {
@@ -171,7 +157,9 @@ export const updateProfileStatusThunkCreator = (status) => (dispatch) => {
             if (response.data.resultCode === 0) {
                 dispatch(setProfileStatus(status));
             }
-        })
+        });
+
+
 };
 
 
