@@ -2,11 +2,12 @@ import React from 'react';
 import style from "./ProfileInfo.module.css";
 
 
-const ProfileInfoData = ({setProfileUser}) => {
+const ProfileInfoData = ({setProfileUser, editModeChangeOn,userId}) => {
+
     return <div>
 
         <div>
-
+            {!userId && <button onClick={editModeChangeOn}>edit</button> }
             <div className={style.web}>
                 FullName: {setProfileUser.fullName}
             </div>
