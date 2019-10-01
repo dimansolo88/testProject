@@ -13,6 +13,11 @@ const ProfileInfo = (props) => {
         return <Prealoder/>
     }
 
+    const getChangePhoto = (e) => {
+        let fileName = e. target.files[0];
+        props.getPhoto(fileName)
+    };
+
 
     return (
         <div className={style.info}>
@@ -22,9 +27,9 @@ const ProfileInfo = (props) => {
 
             <div>
 
-                <img src={props.setProfileUser.photos.large != null ? props.setProfileUser.photos.large
+                <img src={props.setProfileUser.photos.large ? props.setProfileUser.photos.large
                     : photos} alt="ProfilePhoto"/>
-
+                {!props.match.params.userid && <input type={"file"}  onChange={getChangePhoto}/>}
 
 
 

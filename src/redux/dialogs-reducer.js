@@ -1,9 +1,8 @@
 import {dialogsAPI} from "../API/API";
 import {reset} from 'redux-form';
-import {NavLink} from "react-router-dom";
+
 
 export let GET_DIALOG_SAGA = "DIALOGS/GET_DIALOGS"
-
 
 let get_dialogs_success = "SN/DIALOGS/GET-DIALOGS-SUCCESS";
 let PUT_UP_DIALOG = "PUT_UP_DIALOG";
@@ -79,11 +78,10 @@ const dialoReducer = (state = initialstate, action) => {
 
 export const getDialog = () => ({
     type:GET_DIALOG_SAGA
-})
+});
 
 
 export const getDialogsSuccessActionCreator = (dialogs) => ({
-
     type: get_dialogs_success, payload: dialogs
 });
 
@@ -93,8 +91,7 @@ export const getMessagesSuccessActionCreator = (messages) => ({
 
 export const selectDialogActionCreator = (userId) => ({
     type: SET_SELECT_DIALOG_ID, payload: userId
-})
-
+});
 
 export const putUpActionCreator = (userId) => ({
     type: PUT_UP_DIALOG, userId
@@ -103,12 +100,12 @@ export const putUpActionCreator = (userId) => ({
 export const sendMessageSuccessActionCreator = (messages) => ({
     type: SEND_MESSAGES_SUCCESS, messages
 
-})
+});
 
 export const getMessagesCountActionCreator = (count) => ({
     type: GET_MESSAGES_COUNT_SUCCESS, count
 
-})
+});
 
 
 
@@ -142,9 +139,6 @@ export const startDialogThunkCreator = (userId) => (dispatch, getState) => {
 };
 
 
-
-
-
 export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
     try{
         let message = await dialogsAPI.sendMessage(userId, body);
@@ -158,8 +152,6 @@ export const sendMessageThunkCreator = (userId, body) => async (dispatch) => {
         console.error(e)
     }
 
-
-
 };
 
 
@@ -167,7 +159,7 @@ export const newCountThunkCreator = () => async (dispatch) => {
     let count = await dialogsAPI.getNewMessagesCount();
     dispatch(getMessagesCountActionCreator(count))
 
-}
+};
 
 
 export default dialoReducer;

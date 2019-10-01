@@ -76,6 +76,20 @@ export const profileAPI = {
         // return instance.delete(`auth/login`)
     },
 
+    async updatePhotoProfile(photo) {
+        let formData = new FormData();
+        formData.append("image",photo);
+        try {
+            let res = await instance.put(`/profile/photo`, formData, {
+                headers:{'content-type':'multipart/form-data'}
+                });
+            return res.data
+        }
+        catch (e) {
+            console.log(e)
+        }
+
+    }
 };
 
 export const authAPI = {

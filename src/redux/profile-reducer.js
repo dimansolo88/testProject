@@ -1,14 +1,12 @@
 import {profileAPI} from "../API/API";
 import {reset} from 'redux-form';
 
-let add_post = "ADD-POST";
-// let update_post = "UPDATE-POST";
-// import users from "../assets/images/photoUsersPost.jpg"
-let setProfileUser = "SET-PROFILE-USER";
-let setUserStatus = "SET-PROFILE-STATUS";
-let showPrealoder = "SHOW-PREALODER";
-let DELETE_POST = "DELETE_POST";
-
+let ADD_POST = "SN/PROFILE_REDUCER/ADD-POST";
+let SET_PROFILE_USER = "SN/PROFILE_REDUCER/SET-PROFILE-USER";
+let SET_PROFILE_STATUS = "SN/PROFILE_REDUCER/SET-PROFILE-STATUS";
+let SHOW_PRELOADER = "SN/PROFILE_REDUCER/SHOW-PRELOADER";
+let DELETE_POST = "SN/PROFILE_REDUCER/DELETE_POST";
+let UPDATE_PHOTO_PROFILE = "SN/PROFILE_REDUCER/UPDATE_PHOTO_PROFILE";
 
 
 let initialState = {
@@ -28,7 +26,7 @@ const profileReducer = (state = initialState, action) => {
     // let stateCopy;
 
     switch (action.type) {
-        case add_post:
+        case ADD_POST:
             let newpost = {
                 id: 5,
                 message: action.post,
@@ -49,22 +47,25 @@ const profileReducer = (state = initialState, action) => {
                 ...state, postdata: state.postdata.filter(p => p.id !== action.postId)
             };
 
-        case setProfileUser:
+        case SET_PROFILE_USER:
             return {
                 ...state, setProfileUs: action.profile
             };
 
-        case setUserStatus:
+        case SET_PROFILE_STATUS:
             return {
                 ...state, status: action.status
             };
 
-
-        case showPrealoder:
+        case SHOW_PRELOADER:
             return {
                 ...state, isFetching: action.isFetching
             };
 
+        case UPDATE_PHOTO_PROFILE:
+            return {
+                ...state, setProfileUs: {...state.setProfileUs, photos: action.photo}
+            };
 
 
         default:
@@ -98,50 +99,33 @@ const profileReducer = (state = initialState, action) => {
 // return state;
 
 
+
+
+export const addpostActionCreator = (post) => ({type: ADD_POST, post});
+export const deleteActionCreator = (postId) => ({type: DELETE_POST, postId});
+export const setProfileU = (profile) => ({type: SET_PROFILE_USER, profile});
+export const setProfileStatus = (status) => ({type: SET_PROFILE_STATUS, status});
+export const showPrealoderAC = (isFetching) => ({type: SHOW_PRELOADER, isFetching});
+export const updatePhotoAC = (photo) => ({type: UPDATE_PHOTO_PROFILE, photo});
+
 export const addPOstThunkCreator = (post) => (dispatch) => {
     dispatch(addpostActionCreator(post));
     dispatch(reset('addNewPOst'));  // requires form name
 }
-
-export const addpostActionCreator = (post) => ({
-    type: add_post, post
-
-});
-
-export const deleteActionCreator = (postId) => ({
-    type: DELETE_POST, postId
-})
-
-
-// export const updatepostActionCreator = (textposts) => ({
-//     type: update_post, postext: textposts
-//
-// });
-
-export const setProfileU = (profile) => ({type: setProfileUser, profile});
-export const setProfileStatus = (status) => ({type: setUserStatus, status});
-export const showPrealoderAC = (isFetching) => ({type: showPrealoder, isFetching});
-
-
 
 export const profileInfoThunkCreator = (userid) => {
     return (dispatch) => {
         profileAPI.profileInfo(userid)
             .then(response => {
                 dispatch(setProfileU(response.data))
-
-
             })
-
     }
 };
 
 export const getProfileStatusThunkCreator = (userid) => {
     return (dispatch) => {
-
         profileAPI.getProfileStatus(userid)
             .then(response => {
-
                 dispatch(setProfileStatus(response.data))
             })
     }
@@ -149,19 +133,29 @@ export const getProfileStatusThunkCreator = (userid) => {
 
 export const updateProfileStatusThunkCreator = (status) => (dispatch) => {
     dispatch(showPrealoderAC(true));
-
     profileAPI.updateProfileStatus(status)
         .then(response => {
             dispatch(showPrealoderAC(false));
-
             if (response.data.resultCode === 0) {
                 dispatch(setProfileStatus(status));
             }
         });
-
-
 };
 
+
+export const updatePhotoProfileThunkCreator = (photo) => async (dispatch) => {
+    try {
+        dispatch(showPrealoderAC(true));
+        let res = await profileAPI.updatePhotoProfile(photo);
+        dispatch(showPrealoderAC(false));
+        if (res.resultCode === 0) {
+            dispatch(updatePhotoAC(res.data.photos));
+        }
+    } catch (e) {
+        console.log(e)
+    }
+
+};
 
 export default profileReducer;
 
