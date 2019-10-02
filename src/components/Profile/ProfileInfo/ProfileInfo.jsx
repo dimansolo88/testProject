@@ -6,10 +6,12 @@ import photos from '../../../assets/images/userPhoto.jpg'
 import ProfileStatusWithHook from "./WithHook";
 import ProfileInfoData from "./ProfileInfoData";
 import EditProfileData from "./EditProfileData";
+import Modal from "../../Common/Modal/Modal";
 
 
 const ProfileInfo = (props) => {
     const [editProfileData, setEdiProfileData] = useState(false);
+
 
     const editModeChangeOn = () => {
         setEdiProfileData(true)
@@ -40,9 +42,6 @@ const ProfileInfo = (props) => {
             {!editProfileData ? <ProfileInfoData setProfileUser={props.setProfileUser}
                                                  editModeChangeOn={editModeChangeOn} userId={props.match.params.userid}/> :
                 <EditProfileData setProfileUser={props.setProfileUser} editModeOff={editModeOff}/>}
-
-
-
 
 
         </div>
