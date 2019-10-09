@@ -41,7 +41,8 @@ const ProfileInfo = (props) => {
             <ProfileStatusWithHook {...props}  />
             {!editProfileData ? <ProfileInfoData setProfileUser={props.setProfileUser}
                                                  editModeChangeOn={editModeChangeOn} userId={props.match.params.userid}/> :
-                <EditProfileData setProfileUser={props.setProfileUser} editModeOff={editModeOff}/>}
+                <EditProfileData initialValues={props.setProfileUser} setProfileUser={props.setProfileUser} editModeOff={editModeOff}
+                                 saveProfile={props.saveProfile}/>}
 
 
         </div>

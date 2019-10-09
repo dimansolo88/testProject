@@ -6,19 +6,19 @@ const ProfileInfoData = ({setProfileUser, editModeChangeOn,userId,} ) => {
 
     return <div>
 
-
         <div>
             {!userId && <button onClick={editModeChangeOn}>edit</button> }
             <div className={style.web}>
                 FullName: {setProfileUser.fullName}
             </div>
             <div>
-                aboutMe: {setProfileUser.aboutMe}
+                lookingForAJob: {!setProfileUser.lookingForAJob ? "No"
+                : setProfileUser.lookingForAJobDescription}
             </div>
             <div>
-                lookingForAJob: {!setProfileUser.lookingForAJob ? "I am not locking for any job "
-                : setProfileUser.lookingForAJob}
+                aboutMe: {setProfileUser.aboutMe}
             </div>
+
 
 
         </div>

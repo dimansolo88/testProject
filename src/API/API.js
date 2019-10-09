@@ -86,7 +86,17 @@ export const profileAPI = {
             return res.data
         }
         catch (e) {
-            console.log(e)
+           throw new Error(e.message)
+        }
+
+    },
+
+    async updateProfileData (profileData) {
+        try {
+            let res = instance.put(`/profile`,profileData);
+            return res
+        } catch (e) {
+            throw new Error(e.data.message)
         }
 
     }

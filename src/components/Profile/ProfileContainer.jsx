@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
     getProfileStatusThunkCreator,
-    profileInfoThunkCreator, updatePhotoProfileThunkCreator,
+    profileInfoThunkCreator, saveProfileThunkCreator, updatePhotoProfileThunkCreator,
     updateProfileStatusThunkCreator
 } from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
@@ -32,7 +32,6 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
         if (this.props.match.params.userid != prevProps.match.params.userid) {
             this.refreshProfile()
         }
@@ -71,7 +70,7 @@ export default compose(
     connect(mapStateToProps, {
         profileInfo: profileInfoThunkCreator,
         getStatus: getProfileStatusThunkCreator, updateStatus: updateProfileStatusThunkCreator,
-        getPhoto:updatePhotoProfileThunkCreator
+        getPhoto:updatePhotoProfileThunkCreator, saveProfile:saveProfileThunkCreator
     }),
     withRouter,
     WithAthREdirect

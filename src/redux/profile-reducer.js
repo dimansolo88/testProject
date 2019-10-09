@@ -99,8 +99,6 @@ const profileReducer = (state = initialState, action) => {
 // return state;
 
 
-
-
 export const addpostActionCreator = (post) => ({type: ADD_POST, post});
 export const deleteActionCreator = (postId) => ({type: DELETE_POST, postId});
 export const setProfileU = (profile) => ({type: SET_PROFILE_USER, profile});
@@ -152,6 +150,22 @@ export const updatePhotoProfileThunkCreator = (photo) => async (dispatch) => {
             dispatch(updatePhotoAC(res.data.photos));
         }
     } catch (e) {
+        console.log(e)
+    }
+
+};
+
+export const saveProfileThunkCreator = (profileData) => async (dispatch, getState) => {
+    try {
+        dispatch(showPrealoderAC(true));
+        let res = await profileAPI.updateProfileData(profileData);
+        dispatch(showPrealoderAC(false));
+        if (res.data.resultCode === 0) {
+            let userId = getState().auth.userId;
+            dispatch(profileInfoThunkCreator(userId));
+        }
+    }
+    catch (e) {
         console.log(e)
     }
 
