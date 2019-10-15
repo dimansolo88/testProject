@@ -158,6 +158,7 @@ export const updatePhotoProfileThunkCreator = (photo) => async (dispatch) => {
 export const saveProfileThunkCreator = (profileData) => async (dispatch, getState) => {
     try {
         dispatch(showPrealoderAC(true));
+        
         let res = await profileAPI.updateProfileData(profileData);
         dispatch(showPrealoderAC(false));
         if (res.data.resultCode === 0) {
