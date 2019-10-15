@@ -163,6 +163,7 @@ export const saveProfileThunkCreator = (profileData) => async (dispatch, getStat
         if (res.data.resultCode === 0) {
             let userId = getState().auth.userId;
             dispatch(profileInfoThunkCreator(userId));
+
         }
     }
     catch (e) {
