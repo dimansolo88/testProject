@@ -5,8 +5,10 @@ import {EditProfileReduxForm} from "./editProfileDataForm";
 const EditProfileData = ({setProfileUser, editModeOff, onCancel, Onsubmit, children, editProfileData, saveProfile,
                              initialValues}) => {
     const onSubmit = (forDAta) => {
-        saveProfile(forDAta)
-        // editModeOff()
+        saveProfile(forDAta).then(() => {
+            editModeOff()
+        })
+
 
     };
 

@@ -164,7 +164,8 @@ export const saveProfileThunkCreator = (profileData) => async (dispatch, getStat
             dispatch(profileInfoThunkCreator(userId));
     }
       else { dispatch(stopSubmit('editProfile', {_error: res.data.messages.length > 0
-                ? res.data.messages[0] : "some error"  }))
+                ? res.data.messages[0] : "some error"  }));
+            return Promise.reject(res.data.messages[0])
     }
 
 };
