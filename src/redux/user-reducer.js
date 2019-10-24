@@ -158,7 +158,7 @@ export const unfollowThunkCreator = (id) => {
             }
         }
     } catch (e) {
-        console.warn(e)
+
     }
 };
 

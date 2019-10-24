@@ -6,7 +6,7 @@ const EditProfileData = ({setProfileUser, editModeOff, onCancel, Onsubmit, child
                              initialValues}) => {
     const onSubmit = (forDAta) => {
         saveProfile(forDAta)
-        editModeOff()
+        // editModeOff()
 
     };
 
