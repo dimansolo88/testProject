@@ -6,12 +6,10 @@ import {loginThunkCreator} from "../../redux/Auth-reducer";
 import {Redirect} from "react-router-dom";
 
 
-
 const Login = (props) => {
 
-    const onSubmit = ({email, password,rememberMe}) => {
-        props.loginThunkCreator(email, password,rememberMe);
-
+    const onSubmit = ({email, password, rememberMe, captcha}) => {
+        props.loginThunkCreator(email, password, rememberMe, captcha);
 
 
     };
@@ -21,27 +19,24 @@ const Login = (props) => {
     }
 
 
-    return <div className={style.login} >
-
+    return <div className={style.login}>
 
 
         <h1> Login </h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
-
-
+        <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
 
 
     </div>
 };
 
 
-
 const mapStateToProps = (state) => {
-   return { isAuth:state.auth.isAuth,
-   }
-
+    return {
+        isAuth: state.auth.isAuth,
+        captchaUrl:state.auth.captcha,
+    }
 
 
 };
 
-export default connect (mapStateToProps, {loginThunkCreator}) (Login);
+export default connect(mapStateToProps, {loginThunkCreator})(Login);

@@ -64,10 +64,10 @@ export const profileAPI = {
         return instance.put(`profile/status/`, {status: status})
     },
 
-    login(email, password, rememberMe = false) {
+    login(email, password, rememberMe = false, captcha = null) {
         console.warn("please to use new method: logInAPI.login");
         // return instance.post(`auth/login`, {email,password,rememberMe})
-        return logInAPI.login(email, password, rememberMe = false)
+        return logInAPI.login(email, password, rememberMe, captcha )
     },
 
     logOut() {
@@ -78,22 +78,21 @@ export const profileAPI = {
 
     async updatePhotoProfile(photo) {
         let formData = new FormData();
-        formData.append("image",photo);
+        formData.append("image", photo);
         try {
             let res = await instance.put(`/profile/photo`, formData, {
-                headers:{'content-type':'multipart/form-data'}
-                });
+                headers: {'content-type': 'multipart/form-data'}
+            });
             return res.data
-        }
-        catch (e) {
-           throw new Error(e.message)
+        } catch (e) {
+            throw new Error(e.message)
         }
 
     },
 
-    async updateProfileData (profileData) {
+    async updateProfileData(profileData) {
         try {
-            let res = instance.put(`/profile`,profileData);
+            let res = instance.put(`/profile`, profileData);
             return res
         } catch (e) {
             throw new Error(e.data.message)
@@ -115,8 +114,8 @@ export const authAPI = {
 
 
 export const logInAPI = {
-    login(email, password, rememberMe = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(email, password, rememberMe = false, captcha = null) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
 
     logOut() {
@@ -124,6 +123,18 @@ export const logInAPI = {
     },
 
 
+};
+
+export const captchaAPI = {
+    async captchaUrl() {
+        try {
+            let res =  await instance.get(`security/get-captcha-url`)
+            return res
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
 };
 
 
