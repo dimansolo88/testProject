@@ -129,7 +129,7 @@ export const captchaAPI = {
     async captchaUrl() {
         try {
             let res =  await instance.get(`security/get-captcha-url`)
-            return res
+            return res.data
         } catch (e) {
             console.log(e)
         }

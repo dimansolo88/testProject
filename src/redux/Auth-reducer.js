@@ -77,7 +77,7 @@ export const loginThunkCreator = (email, password, rememberMe, captcha) => (disp
 
 export const getCaptchaUrl = () => async (dispatch) => {
     const res = await captchaAPI.captchaUrl()
-    dispatch(setCaptchaSuccess(res.data.url))
+    dispatch(setCaptchaSuccess(res.url))
 
 }
 
